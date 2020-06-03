@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.configdiv {border: 0px solid #DDDDDD;
+           margin-right: 28px;
+           margin-bottom: 25px;
+           padding: 10px;
+}
+div#modeloapp{
+   
+    background-color: rgba(220,220,220,0.3);
+   
+}
+
+div#principal{
+    margin-top:  0%;
+   
+    
+}
+
+di#imgmenu{   
+   right: 100px;
+   width: 10%;     
+}
+
+
+
+div#meuapp{
+   background-color: rgba(34,139,34,0.3);
+   
+    /*
+    background-color: rgba(106,90,205,0.3);
+    */
+   
+}
+
+div#faqapp{
+   
+    background-color: rgba(255,215,0,0.3);
+   
+}
+
+div#contatoapp{
+
+    background-color: rgba(230,218,185,0.3);
+
+}
+
+div#categoriaapp{
+
+    background-color: rgba(0,255,255,0.3);
+
+}
+
+
+

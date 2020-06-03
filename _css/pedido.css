@@ -1,0 +1,6 @@
+.tbl-qa{width: 98%;font-size:0.9em;border-bottom: 5px solid #D5D5D5;}
+.tbl-qa th.table-header {margin-top: 80px;padding: 10px; text-align: left;padding:12px;border-bottom: 5px solid #D5D5D5;}
+.tbl-qa .table-row td { height: 2px;padding:10px;border-bottom: 1px solid #D5D5D5;}
+.ajax-action-links {color: #09F; margin: 10px 0px;cursor:pointer;}
+.ajax-action-button { border:2px solid #D5D5D5; margin: 10px 1px;cursor:pointer;display: inline-block;padding: 10px 20px;}
+.margin-top-md{margin-top: 80px;}

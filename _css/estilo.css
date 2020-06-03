@@ -1,0 +1,315 @@
+@charset "UTF-8";
+/*@import url('https://fonts.googleapis.com/css?family=Titillium+Web') C0C0C0  */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@font-face{
+   font-family: 'fontelogo';
+   src: url("../_fonts/RobotoMono-Bold.ttf");
+}
+
+body{
+      font-family: Arial, sans-serif;
+      background-color: #F0F8FF;
+      color: rgba(0,0,0,1);      
+      
+}
+
+div#interface{   
+   width: 900px;
+   background-color: #F0F8FF;
+   margin: -10px auto 0px auto;
+   box-shadow: 0px 0px 10px black;
+   padding: 20px;
+   background-image: url('../_imagens/logopc.jpg') no-repeat 100% 100%;               
+}
+    
+p{
+   text-align:justify;
+   text-indent: 50px;
+}
+   
+a{
+   color: #606060;
+   text-decoration: none;
+}  
+ 
+h7 {
+  font-size: 10px;
+}
+
+a:hover{
+   text-decoration: underline;
+}
+
+div#logopc{
+    
+}
+
+header#cabecalho img#icone{
+   display: block; 
+   position: absolute;
+   left: 1100px;
+   top: 70px;
+   size: 5px;   
+} 
+
+header#cabecalho h1{
+   font-family: 'fontelogo', sans-sarif;
+   font-size: 30pt;
+   color: #606060;
+   text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+   padding: 0px;
+   margin-bottom: 0px;   
+}
+  
+header#cabecalho h2{
+   /*font-family: Arial, sans-sarif;
+   font-family: 'Titillium Web', sans-serif;*/
+   font-family: 'Open Sans', sans-serif;
+   font-size: 15pt;
+   color: #800000;
+   padding: 0px;
+   margin-top: 0px;
+   
+}
+
+/* formata��o de imagens com legenda */
+figure.foto-legenda{
+   position: relative;
+   border: 8px solid white;
+   box-shadow: 1px 1px 4px black; 
+   
+}   
+
+figure.foto-legenda img {
+   width: 100%;
+   height: 100%;
+}
+
+figure.foto-legenda figcaption{
+   opacity:    0;
+   position:   absolute;
+   top:        0px;
+   background-color: rgba(0,0,0,.4);
+   color:      white;
+   width:      100%;
+   height:     100%;
+   padding:    10px;
+   box-sizing: border-box; 
+   transition: opacity 1s;
+}
+
+figure.foto-legenda:hover figcaption{
+   opacity: 1;
+}
+
+/* fim formata��o de imagens com legenda */
+
+/*  Formata��o Menu */
+
+nav#menu {
+   display: block;
+   position: relative;
+   left: 320px;
+   top:  -130px;
+}
+
+nav#menu h1{
+    display: none;
+}
+
+nav#menu ul{
+
+       list-style: none;
+       text-transform: uppercase;
+       /*position: absolute;
+       position: realtive;
+       left: 500px;
+       top:  10px;*/
+
+}
+
+nav#menu li{
+   display: inline-block;
+   background-color: #dddddd;
+   padding: 10px;
+   margin: 2px;
+   transition: background-color 1s; 
+
+}
+
+nav#menu li:hover{
+    background-color: #606060;
+
+}
+
+nav#menu a{
+   color : #000000;
+   text-decoration: none;
+}
+
+nav#menu a:hover{
+    color: #ffffff;
+    text-decoration: underline;    
+}
+
+nav#menups {
+   display: block;
+   position: relative;
+   left: 400px;
+   top:  -100px;
+}
+
+nav#menups h1{
+    display: none;
+}
+
+nav#menups ul{
+
+       list-style: none;
+       text-transform: uppercase;
+       /*position: absolute;
+       position: realtive;
+       left: 500px;
+       top:  10px;*/
+
+}
+
+nav#menups li{
+   display: inline-block;
+   background-color: #dddddd;
+   padding: 8px;
+   margin: 2px;
+   font-size: 13px;
+   transition: background-color 1s; 
+
+}
+
+nav#menups li:hover{
+    background-color: #606060;
+
+}
+
+nav#menups a{
+   color : #000000;
+   text-decoration: none;
+}
+
+nav#menups a:hover{
+    color: #ffffff;
+    text-decoration: underline;    
+}
+
+
+
+/*  fim Formata��o Menu */
+
+section#corpo {
+   margin-top: 50px; 
+   display: block;
+   height: 600px;
+   float: left;
+   border-right: 1px solid #606060;
+   padding-right: 15px;
+   
+}
+
+article#noticia-principal h2{
+
+   font-size: 13pt;
+   color: #ffffff;
+   background-color: #ff0000;
+   padding: 5px 0px 5px 10px;
+   margin: 10px 0px 10px 0px;
+
+}
+
+header#cabecalho-artigo h1{
+   font-family:'FonteLogo', sans-serif;
+   font-size: 20pt;
+   color: #606060;
+   margin-bottom: 0px;
+   margin-top:  0px;
+}
+
+.direita{
+  text-align: right;
+}
+
+header#cabecalho-artigo h2{
+
+   font-size: 13pt;
+   color: #cecece;
+   background-color: #ffffff;   
+   margin: 0px;
+   
+}
+
+header#pesquisa h1{
+   font-size: 13pt;
+   color: #cecece;
+   background-color: #ffffff;   
+   margin: 0px;
+}
+
+
+header#cabecalho-artigo h3{
+   font-size: 12px;
+   color: #606060;
+}
+
+aside#lateral {
+   display: block;
+   width: 550px;
+   float: right;
+   background-color: #dddddd;
+   padding: 10px;
+   margin-top: 55px;
+   box-shadow: 2px 2px 2px rgba(0,0,0,.5);
+}
+
+aside#lateral h1{
+   font-family: 'FonteLogo', sans-sarif;
+   font-size: 20pt;
+   color: #606060;
+
+}
+
+aside#lateral h2{
+   font-size: 13pt;
+   color: #606060;
+   padding: 5px;
+   margin: 10px;
+}
+
+footer#rodape {
+   clear: both;
+   background-color: #ff0000;
+   border-top: 10px solid #606060;
+}
+
+footer#rodape p{
+   text-align: center;
+}
+
+footer#rodape a{
+   text-align: center;
+   color: #ffffff;
+}
+
+fieldset#usuario{
+   background-color: #E0FFFF;
+}
+
+fieldset#endereco{
+   background-color: #E0FFFF;
+}
+
+fieldset#informacao{
+   background-color: #E0FFFF;
+}
+
+
+input#pesquisa{
+    margin-top: 10px; 
+    margin-left: 150px; 
+}

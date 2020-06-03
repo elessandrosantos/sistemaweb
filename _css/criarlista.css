@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+form{
+   width: 500px;
+}
+div#interfaceml{   
+   width: 1050px;
+   background-color: #F0F8FF;
+   margin: -10px auto 0px auto;
+   box-shadow: 0px 0px 10px black;
+   padding: 20px;
+}
+
+
+input, textarea{
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 13pt;
+  background-color: rgba(255,255,255,.8);
+}
+
+input:hover, textarea:hover{
+   background-color: #dddddd;
+
+}
+
+legend{
+   color: #888888;
+   font-weight: bolf;
+   font-size: 13pt;
+   font-family: sans-serif;
+
+}
+
+fieldset{
+   border-color: #cecece;
+   margin:20px;
+}
+
+fieldset#sexo{
+   width: 150px;
+
+}
+
+fieldset#usuario{
+   background: url("../_imagens/icone-contato.png") no-repeat 95% 95%;
+
+}
+
+input#entra{
+    margin-left: 200px; 
+}
+
+#botaoimp{
+    position: relative;
+    left: 100%;
+    top: 55%
+}
