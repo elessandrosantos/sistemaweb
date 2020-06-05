@@ -22,11 +22,22 @@ function opcaomenu($cmenu, $cparam) {
         $ctela = 'clientes.php';
     }
 
+    if ($cmenu == "dlgpesqpedvendaservico"){
+        $ctela = 'pesqpedvendaservico.php';
+    }
+    
+    if ($cmenu == "dlgpesqpedvendaproduto"){
+        $ctela = 'pesqpedvendaproduto.php';
+    }
+    
     if ($cmenu == "dlgpedvendaservicos") {
+        
+        $_SESSION['npedido'] =  $cparam;        
         $ctela = 'pedidovendaservicos.php';
     }
 
     if ($cmenu == "dlgpedvendaprodutos") {
+        $_SESSION['npedido'] =  $cparam;
         $ctela = 'pedidovendaprodutos.php';
     }
     
@@ -34,6 +45,16 @@ function opcaomenu($cmenu, $cparam) {
         $_SESSION['param'] = $cparam;
         $ctela = 'atualizaclientes.php';
     }
+    
+    if ($cmenu == "dlgitenspedserv") {    
+        $_SESSION['param'] = $cparam;
+        $ctela = 'itenspedservico.php';
+    }
+    
+    if (empty($ctela)){
+       $ctela = 'empty.php';
+    }
+    
     return $ctela;
 }
 

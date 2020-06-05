@@ -4,61 +4,6 @@ $cped = $_SESSION['npedido'];
 
 include $_SERVER['DOCUMENT_ROOT']."/_conexao/crud.php";
 
-if(empty($cped)){
-    
-   $acao = 'inserir';
-   $cwhereform = '';
-    
-   $ctpped = "PS";
-   $cped   = $ctpped . '00000000001';
-   $cdata  = '';
-   $cusuario = '';            
-   $cempresa = '';
-   $ccliente = '';
-   $ccondpagto = '';
-   $ctpoperacao = '';
-   $cseupedido = '';
-   $cdoc_fiscal = '';
-   $cobs = '';
-   $cobs1 = '';
-   $ndesconto = '';
-   $nacrescimo = '';
-    
-}else{
-  
-   $acao = 'alterar';
-   $cwhereform = "PED='" . $cped . "'";
-    
-   $conn = conectar();
-
-   $ctab = "PEDIDOS A, CLIENTES B";
-   $cccampo = "A.aberta, A.usuario, A.empresa, A.cod_cli, B.nome, A.cod_con, A.cod_ser, A.seu_ped, A.doc_fiscal, A.obs1, A.obs2 ";
-   $cccampo .= ", A.desconto, A.acrescimo";
-   $cwhere = "A.cod_cli = B.xclientes";
-   $cwhere .= " and A.PED = '" . $cped . "'";
-   $res = new crud();
-   $aret = $res->obter($cccampo, $ctab, $cwhere);
-
-   foreach ($aret as $row) {
-
-      
-      $cdata  = $row['aberta'];
-      $cusuario = $row['usuario'];            
-      $cempresa = $row['empresa'];
-      $ccliente = $row['cod_cli'];
-      $cnmcliente = $row['nome'];
-      $ccondpagto = $row['cod_con'];
-      $ctpoperacao = $row['cod_ser'];
-      $cseupedido = $row['seu_ped'];
-      $cdoc_fiscal = $row['doc_fiscal'];
-      $cobs = $row['obs1'];
-      $cobs1 = $row['obs2'];
-      $ndesconto = $row['desconto'];
-      $nacrescimo = $row['acrescimo'];
-                           
-   } 
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,8 +18,7 @@ if(empty($cped)){
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css"> -->
 
 
-    </head>
-<form id="fped" name="formnomepediserv" method="post" onsubmit="return getdadosform('pedido', '<?php echo $acao;?>', '<?php echo $cwhereform;?>'); return false;">
+    </head>        
     <main class="container-fluid">
         <div class="row">     
             <div class="form-group col-md-5"> 
@@ -89,35 +33,35 @@ if(empty($cped)){
                 <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmgetCodigoAnterior">Número</label>
-                        <input type="text" class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
+                        <input type="text" class="form-control" value="<?php echo $cped; ?>" name="nmgetCodigoAnterior" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetCNPJCPF">Data</label>
-                        <input type="date" class="form-control" value="<?php echo $cdata; ?>" name="ABERTA" id="idgetCNPJCPF" size="20" maxlength="20" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetCNPJCPF" id="idgetCNPJCPF" size="20" maxlength="20" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetRazaoSocial">Usuários</label>
-                        <input type="text" class="form-control" value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetRazaoSocial" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetRazaoSocial">Empresa</label>
-                        <input type="text" class="form-control" value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetRazaoSocial" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
                     </div> 
 
                 </div>                     
                 <div class="row">                   
                     <div class="form-group col-md-6">   
                         <label for="nmgetNomeFantasia">Cliente</label>
-                        <input type="text" class="form-control" value="<?php echo $codcli; ?>" name="COD_CLI" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetNomeFantasia" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
                     </div> 
 
                     <div class="form-group col-md-3">   
                         <label for="nmgetNomeFantasia">Cond. Parcelamento</label>
-                        <input type="text" class="form-control" value="<?php echo $ccondpagto; ?>" name="COD_CON" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetNomeFantasia" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetCEP">Tipo da Operacao</label>
-                        <input type="text" class="form-control" value="<?php echo $ctpoperacao; ?>" name="COD_SER" id="idgetCEP" size="10" maxlength="10" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetCEP" id="idgetCEP" size="10" maxlength="10" placeholder=""/>
                     </div> 
                
                      </div>
@@ -138,7 +82,7 @@ if(empty($cped)){
            
             <div id="abaItens" class="tab-pane container-fluid active">  
                 
-                <div class="margin-top-sm table-responsive"> 
+                <div class="margin-top-sm"> 
                     <table class="table table-striped table-bordered">                        
                         <thead>
                             <tr>
@@ -184,42 +128,49 @@ if(empty($cped)){
                     <!-- <div class="ajax-action-button" id="add-more" onclick="createNew();" style="display: inline-block;">Adicionar Itens</div> -->
                 </div>
             </div>
-            <div id="abaDadosComplementares" class="tab-pane container-fluid fade">
+            <div id="abaDadosComplementares" class="tab-pane container fade">
                 <h5></h5>
                 <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmcbxBanco">Seu Pedido</label>
-                        <input type="text" class="form-control" value="<?php echo $cseupedido; ?>" name="SEU_PED" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetCobranca" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
                     </div>
                     <div class="form-group col-md-3">   
                         <label for="nmgetCobranca">Doc. Fiscal</label>
-                        <input type="text" class="form-control" value="<?php echo $cdoc_fiscal; ?>" name="DOC_FISCAL" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetCobranca" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-6">   
                         <label for="nmgetJuros">Observação</label>
-                        <input type="text" class="form-control" value="<?php echo $cobs; ?>" name="OBS" id="idgetJuros" size="6" maxlength="6" placeholder=""/>
+                        <input type="text" class="form-control" name="nmgetJuros" id="idgetJuros" size="6" maxlength="6" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetTolerancia">Desconto R$</label>
-                        <input type="number" class="form-control" value="<?php echo $ndesconto; ?>" name="DESCONTO" id="idgetTolerancia" size="5" maxlength="5" placeholder=""/>
+                        <input type="number" class="form-control" name="nmgetTolerancia" id="idgetTolerancia" size="5" maxlength="5" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetMulta">Acréscimo</label>
-                        <input type="number" class="form-control" value="<?php echo $nacrescimo; ?>" name="ACRESCIMO" id="idgetMulta" size="6" maxlength="6" placeholder=""/>
+                        <input type="number" class="form-control" name="nmgetMulta" id="idgetMulta" size="6" maxlength="6" placeholder=""/>
                     </div>                     
                 </div>
             </div>
-            <div id="abaDemaisInformacoes" class="tab-pane container-fluid fade">
+            <div id="abaDemaisInformacoes" class="tab-pane container fade">
                 <h5></h5>
                 <div class="row">
                     <div class="form-group col-md-12">   
                         <label for="nmtextObservacao">Observacao</label>
-                        <input type="text" class="form-control" value="<?php echo $cobs1; ?>" name="OBS1" id="idtextObservacao" size="100" maxlength="500" placeholder=""/>
+                        <input type="text" class="form-control" name="nmtextObservacao" id="idtextObservacao" size="10" maxlength="10" placeholder=""/>
                     </div> 
                 </div>
             </div> 
-            
+            <div class="row">     
+                <div class="form-group col-md-3">   
+                    <input name="nmbtnnmbtnBuscaCEP" type="submit" id="idbtnidbtnBuscaCEP" value="Emitir Nota Fiscal" />
+                </div>
+
+                <div class="form-group col-md-3">   
+                    <input name="nmbtnnmbtnFinanceiro" type="submit" id="idbtnidbtnFinanceiro" value="Financeiro" />
+                </div>
+            </div>
         </div> 
     </main>
 </html>
-

@@ -14,12 +14,12 @@ if(!empty($_POST["pedido"])) {
    $quant = str_replace(',', '.', $quant);        
    $vlruni = str_replace(',', '.', $vlruni);        
         
-   $sql = "INSERT INTO mov_ped (ped, data_criacao, codigo, quant, valor_unit) VALUES ('" . $pedido . "','" . $data . "','".$produto."',".$quant.",".$vlruni.")";
+   $sql = "INSERT INTO mov_peds (ped, data_criacao, codigo, quant, valor_unit) VALUES ('" . $pedido . "','" . $data . "','".$produto."',".$quant.",".$vlruni.")";
               
    $faq_id = $db_handle->executeInsert($sql);
    
    if(!empty($faq_id)) {
-      $sql = "SELECT * from mov_ped WHERE regid = $faq_id ";
+      $sql = "SELECT * from mov_peds WHERE regid = $faq_id ";
       echo $sql;
       $posts = $db_handle->runSelectQuery($sql);
    }

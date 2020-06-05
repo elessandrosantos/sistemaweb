@@ -6,9 +6,11 @@
        <!-- <script src="_js/funcoes.js" type="text/javascript"></script>  -->
     </head>
 </html>     
+
+
 <form id="fcadcli" name="formnomecadclie" method="post" onsubmit="return getdadosform('CLIENTES', 'inserir'); return false;">  <!--action="fu_cadcliente.php" -->
-    <body>
         <main class="container">
+
             <div class="row">     
                 <div class="form-group col-md-5"> 
                     <h2>Clientes </h2>
@@ -245,5 +247,6 @@
                         </div>
                     </div></div> 
             </div>
+                    </body>
         </main>
-    </body>
+    

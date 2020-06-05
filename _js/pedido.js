@@ -71,8 +71,8 @@ function addToHiddenField(addColumn, hiddenField) {
 }
 
 function deleteRecord(id) {
-    // var id = $("#regid").val();
-    //alert("Alerta"+id);
+    var id = $("#regid").val();
+    alert("Alerta"+id);
     if (confirm('Tem certeza que vai deletar a tabela?')) {
         $.ajax({
             url: "/_conexao/delete.php",

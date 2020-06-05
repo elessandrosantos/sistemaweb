@@ -45,10 +45,21 @@ class crud {
        
        $this->csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;        
        $selectdados = $conn->prepare($this->csql);
-       if ($selectdados->execute()) {
-          $adado = $selectdados->fetchall(PDO::FETCH_ASSOC);
-          return $adado;
-        }
+       //echo $this->csql;
+       try {
+          if ($selectdados->execute()) {
+             $adado = $selectdados->fetchall(PDO::FETCH_ASSOC);
+             return $adado;
+          } 
+           
+       } catch (Exception $e) {
+       //    echo $e;
+       //    echo $this->csql;
+             return $e->getMessage();
+           
+       }
+       
+        
     }
 
 }
