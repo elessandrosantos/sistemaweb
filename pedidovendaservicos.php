@@ -59,6 +59,10 @@ if(empty($cped)){
    } 
 }
 
+echo $acao;
+echo $cwhereform;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,53 +79,92 @@ if(empty($cped)){
 
     </head>
 <form id="fped" name="formnomepediserv" method="post" onsubmit="return getdadosform('pedido', '<?php echo $acao;?>', '<?php echo $cwhereform;?>'); return false;">
-    <main class="container-fluid">
-        <div class="row">     
-            <div class="form-group col-md-5"> 
+    <main class="container-fluid">            
+            <div class="form-group col-md-12"> 
                 <h5> Pedido </h5>
             </div>  
-            <div class="form-group col-md-5">
-            </div> 
             <div class="form-group col-md-5"> 
                 <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 
             </div> 
                      
-                <div class="row">
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetCodigoAnterior">Número</label>
-                        <input type="text" class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetCNPJCPF">Data</label>
-                        <input type="date" class="form-control" value="<?php echo $cdata; ?>" name="ABERTA" id="idgetCNPJCPF" size="20" maxlength="20" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetRazaoSocial">Usuários</label>
-                        <input type="text" class="form-control" value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetRazaoSocial">Empresa</label>
-                        <input type="text" class="form-control" value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
-                    </div> 
+            <div class="row">
+               <div class="form-group col-md-3">   
+                  <label for="nmgetCodigoAnterior">Número</label>
+                  <input type="text" class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
+               </div> 
+               <div class="form-group col-md-3">   
+                  <label for="nmgetCNPJCPF">Data</label>
+                  <input type="date" class="form-control" value="<?php echo $cdata; ?>" name="ABERTA" id="idgetCNPJCPF" size="20" maxlength="20" placeholder=""/>
+               </div> 
+               <div class="form-group col-md-3">   
+                  <label for="nmgetRazaoSocial">Usuários</label>
+                  <input type="text" class="form-control" value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
+               </div> 
+               <div class="form-group col-md-3">   
+                  <label for="nmgetRazaoSocial">Empresa</label>
+                  <input type="text" class="form-control" value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
+               </div> 
 
-                </div>                     
-                <div class="row">                   
-                    <div class="form-group col-md-6">   
-                        <label for="nmgetNomeFantasia">Cliente</label>
-                        <input type="text" class="form-control" value="<?php echo $codcli; ?>" name="COD_CLI" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
-                    </div> 
+             </div>                     
+             <div class="row">                   
+                <div class="form-group col-md-6">   
+                   <label for="nmgetNomeFantasia">Cliente</label>
+                   <select name="COD_CLI" class="form-control" id="idcbxcliente" value="<?php echo $codcli; ?>"><option>Informe o Cliente</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "clientes";
+                                $cccampo = "xclientes, nome ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['xclientes'];?> "> <?php echo $row['nome'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                   </select>                       
+                </div> 
 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetNomeFantasia">Cond. Parcelamento</label>
-                        <input type="text" class="form-control" value="<?php echo $ccondpagto; ?>" name="COD_CON" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetCEP">Tipo da Operacao</label>
-                        <input type="text" class="form-control" value="<?php echo $ctpoperacao; ?>" name="COD_SER" id="idgetCEP" size="10" maxlength="10" placeholder=""/>
-                    </div> 
+                <div class="form-group col-md-3">   
+                   <label for="nmgetNomeFantasia">Cond. Parcelamento</label>                   
+                   <select name="COD_CON" class="form-control" value="<?php echo $ccondpagto; ?>" id="idcbxcoondicao" value="<?php echo $codcli; ?>"><option>Condição de Parcelamento</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "condicoes";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                   </select>    
+                </div> 
+                <div class="form-group col-md-3">   
+                   <label for="nmgetCEP">Tipo da Operação</label>
+                   <select name="COD_SER" class="form-control" id="idcbxoperacao" value="<?php echo $ctpoperacao; ?>"><option>Tipo da Operação</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "operacoes";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                   </select>                       
+                </div> 
                
-                     </div>
              </div>
+             
 
         <ul class="nav nav-tabs">
             <li class="nav-item">

@@ -1,3 +1,8 @@
+<?php
+
+include $_SERVER['DOCUMENT_ROOT']."/_conexao/crud.php";
+?>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -12,11 +17,9 @@
         <main class="container">
 
             <div class="row">     
-                <div class="form-group col-md-5"> 
+                <div class="form-group col-md-12"> 
                     <h2>Clientes </h2>
                 </div>  
-                <div class="form-group col-md-5">
-                </div> 
                 <div class="form-group col-md-5"> 
 
                     <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 
@@ -76,7 +79,21 @@
                         </div> 
                         <div class="form-group col-md-3">   
                             <label for="nmcbxLogradouro">Logradouro</label>
-                            <select name="LOGRA" class="form-control" id="idcbxLogradouro"><option>Logradouro</option></select> 
+                            <select name="LOGRA" class="form-control" id="idcbxLogradouro"><option>Logradouro</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "logradouros";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            </select> 
                         </div>
                     </div>
                     <div class="row">
@@ -100,15 +117,61 @@
                         </div> 
                         <div class="form-group col-md-3">   
                             <label for="nmcbxCidade">Cidade</label>
-                            <select name="CIDADE" class="form-control" id="idcbxCidade"><option>Informe a Cidade</option></select> 
+                            <select name="CIDADE" class="form-control" id="idcbxCidade"><option>Informe a Cidade</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "cidades";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            
+                            </select> 
                         </div>
                         <div class="form-group col-md-3">   
                             <label for="nmcbxEstado">Estado</label>
-                            <select name="ESTADO" class="form-control" id="idcbxEstado"><option>Informe o Estado</option></select> 
+                            <select name="ESTADO" class="form-control" id="idcbxEstado"><option>Informe o Estado</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "estados";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            
+                            </select> 
                         </div>
                         <div class="form-group col-md-3">   
                             <label for="nmcbxPais">Pais</label>
-                            <select name="COD_PAIS" class="form-control" id="idcbxPais"><option>Informe o Pais</option></select> 
+                            <select name="COD_PAIS" class="form-control" id="idcbxPais"><option>Informe o Pais</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "pais";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            
+                            
+                            </select> 
                         </div>
                     </div>
                     <div class="row">
@@ -145,7 +208,21 @@
                         </div> 
                         <div class="form-group col-md-3">   
                             <label for="nmgetLogradouro">Logradouro</label>
-                            <input type="text" class="form-control" name="LOGRA_E" id="idgetLogradouroEnt" size="6" maxlength="6" placeholder=""/>
+                             <select name="LOGRA_E" class="form-control" id="idcbxLogradouro"><option>Logradouro</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "logradouros";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            </select> 
                         </div> 
                         <div class="form-group col-md-6">   
                             <label for="nmgetEndereco">Endereco</label>
@@ -170,22 +247,35 @@
                     <div class="row">
                         <div class="form-group col-md-3">   
                             <label for="nmgetCidade">Cidade</label>
-                            <select name="CIDADE_E" class="form-control" id="idcbxCidadeEnt"><option>Informe a Cidade</option></select>                         
+                            <select name="CIDADE_E" class="form-control" id="idcbxCidadeEnt"><option>Informe a Cidade</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "cidades";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            </select>                         
                         </div> 
                         <div class="form-group col-md-3">   
                             <label for="nmgetEstadoEnt">Estado</label>
                             <select name="ESTADO_E" class="form-control" id="idcbxEstadoEnt"><option>Informe o Estado</option>
                                 <?php
-                                $conn = conectar();
-                                $sql = 'SELECT      ' .
-                                       '   codigo, ' .
-                                       '   descr   ' .
-                                       'FROM       ' .
-                                       '   estados ';
-
-                                foreach ($conn->query($sql) as $row) {
+                                $conn = conectar();                               
+                                $ctab = "estados";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
                                 ?> 
-                                <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
                                 <?php
                                 }
                                 ?> 
@@ -194,6 +284,19 @@
                         <div class="form-group col-md-6">   
                             <label for="nmgetPais">Pais</label>
                             <select name="PAIS_E" class="form-control" id="idcbxPaisEnt"><option>Informe o Pais</option>
+                                <?php
+                                $conn = conectar();                               
+                                $ctab = "pais";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
                             </select> 
 
                         </div> 
@@ -204,11 +307,43 @@
                     <div class="row">
                         <div class="form-group col-md-6">   
                             <label for="nmcbxBanco">Banco</label>
-                            <select name="COD_BAN" class="form-control" id="idcbxBanco"><option>Informe o Banco</option></select> 
+                            <select name="COD_BAN" class="form-control" id="idcbxBanco"><option>Informe o Banco</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "bancos";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            
+                            
+                            
+                            </select> 
                         </div>
                         <div class="form-group col-md-6">   
                             <label for="nmgetCobranca">Cobranca</label>
-                            <select name="COD_COB" class="form-control" id="idcbxCobranca"><option>Informe o tipoo de Cobrança</option></select>
+                            <select name="COD_COB" class="form-control" id="idcbxCobranca"><option>Informe o tipoo de Cobrança</option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "cobrancas";
+                                $cccampo = "codigo, descr ";
+                                $cwhere = "1=1";                            
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere);
+                                foreach ($aret as $row) {
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                            
+                            </select>
                         </div> 
                     </div>                     
                     <div class="row">
@@ -238,14 +373,7 @@
                             <input type="text" class="form-control" name="OBS" id="idtextObservacao" size="500" maxlength="5000" placeholder=""/>
                         </div> 
                     </div>
-                    <div class="row">     
-                        <div class="form-group col-md-1">   
-                            <input name="nmbtnnmbtnBuscaCEP" type="submit" id="idbtnidbtnBuscaCEP" value="Busca CEP" />
-                        </div>
-                        <div class="form-group col-md-1">   
-                            <input name="nmbtnnmbtnFinanceiro" type="submit" id="idbtnidbtnFinanceiro" value="Financeiro" />
-                        </div>
-                    </div></div> 
+                </div> 
             </div>
                     </body>
         </main>

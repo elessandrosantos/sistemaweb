@@ -63,13 +63,17 @@ function getdadosform(tabela, acao, idwhere) {
     
     var campos = "";
     var dados = "'";
-    var dadosform = document.getElementsByTagName("INPUT");
+    var dadosinput = document.getElementsByTagName("INPUT");
+    var dadosselect = document.getElementsByTagName("SELECT");
     var where = "";
-    
+      alert(acao);
+      alert(idwhere);
+      
+      
     switch (acao) {
         case 'inserir':
-            for (var i = 0; i < dadosform.length; i++) {
-                var item = dadosform[i];
+            for (var i = 0; i < dadosinput.length; i++) {
+                var item = dadosinput[i];
 
                 if (item.type == "checkbox") {
                     if (item.checked) {
@@ -99,7 +103,15 @@ function getdadosform(tabela, acao, idwhere) {
                 }
 
             }
+            // Faz o loop para os dados de select
+            for (var i = 0; i < dadosselect.length; i++) {
+               var item = dadosselect[i];
 
+                  campos += item.name + ", ";
+                  dados += item.value + "','";
+
+            }
+            
             campos = campos.substr(0, campos.length - 2);
             dados = dados.substr(0, dados.length - 2);
 
@@ -121,8 +133,8 @@ function getdadosform(tabela, acao, idwhere) {
             where = idwhere;
             
             var setdados = "";
-            for (var i = 0; i < dadosform.length; i++) {
-                var item = dadosform[i];
+            for (var i = 0; i < dadosinput.length; i++) {
+                var item = dadosinput[i];
 
                 if (item.type == "checkbox") {
                     alert
@@ -145,10 +157,21 @@ function getdadosform(tabela, acao, idwhere) {
                 }
 
             }
+            
+            // Faz o loop para os dados de select
+            for (var i = 0; i < dadosselect.length; i++) {
+               var item = dadosselect[i];
+
+                  campos += item.name + ", ";
+                  dados += item.value + "','";
+
+            }
+ 
+            
 
             setdados = setdados.substr(0, setdados.length - 1);
             //dados = dados.substr(0, dados.length - 2);
-            
+            alert(setdados);
             $.ajax({
                 url: "/_conexao/crud_ajax.php",
                 type: "POST",

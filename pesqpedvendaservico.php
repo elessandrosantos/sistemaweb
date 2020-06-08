@@ -66,7 +66,7 @@ If ($_POST) {
         </div> 
         <div class="row"> 
             <a href="index.php?p=dlgpedvendaservicos" class="btn btn-success">+ Incluir</a> 
-            <table class="table table-striped table-bordered"> 
+            <table class="table table-striped table-bordered table-responsive"> 
                 <thead>  
                     <tr>     
                         <th width=250>Pedido</th>

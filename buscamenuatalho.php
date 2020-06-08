@@ -8,7 +8,9 @@ $user = 'edsantos';
 
 $con = conectar();
 
-$sql = $con->prepare('SELECT            '.
+$ltemmenu = FALSE;
+
+$sql = $con->prepare('SELECT           '.
                      '   regid,        '.  
                      '   cod_menu,     '.
                      '   descr,        '.
@@ -32,34 +34,36 @@ try {
     echo $exc->getTraceAsString();
 } finally {
     
-   // $stmt = $con::close();
+   
+    
+}
+//id="menu_favoritos" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"
+$cRetMenu .= '<div class="collapse navbar-collapse" id="menu_favoritos" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">'
+            . '<ul class="nav navbar-nav ml-auto">';            
+
+foreach ($amenu as $row) {
+    $cRetMenu .=  '<li class="nav-item active" draggable="true" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">'
+                  .' <a id='. $row['regid'] .' class="btn btn-primary btn-sm" href="' . $row['link'] .'">'.$row['descr'] .'</a> '
+                  .'</li>';
+   $ltemmenu = TRUE; 
+    
+}
+    
+if(!$ltemmenu){
+
+    $cRetMenu .=  '<li class="nav-item active">'
+                  .'<a> <h7> <- Area para favoritos! </h7></a> '
+                  .'</li>';
+
+
     
 }
 
-$cRetMenu .= '<div class="collapse navbar-collapse" id="navbarSupportedContent">'
-            . '<ul class="nav navbar-nav ml-auto">';
-            //.'<li class="nav-item active">';
-
-foreach ($amenu as $row) {
-    $cRetMenu .=  '<li class="nav-item active">'
-                  .' <a class="btn btn-primary btn-sm" href="' . $row['link'] .'">'.$row['descr'] .'</a> '
-                  .'</li>';
-    //$cRetMenu .= '<a class="btn btn-primary btn-sm" draggable="true" href="' . $row['link'] .'" target="_parent">'. $row['descr'] .'</a> </br>';
-}
 
 
-$cRetMenu.= '</ul>'
+$cRetMenu  .= '</ul>'
            .'</div>';
 
-
-
-//<li> <a draggable="true" href="index.php?p=dlgpesqservicos" target="_parent">Servicos</a> </li>
-// <li> 
-//<a draggable="true" href="index.php?p=dlgpesqprodutos" target="_parent">Produtos</a>
-//</li>
-// <li> 
-//<a draggable="true" href="index.php?p=dlgpesqclientes" target="_parent">Clientes</a>
-//</li>
 
 Return $cRetMenu
 

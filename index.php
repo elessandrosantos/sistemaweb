@@ -14,6 +14,7 @@
         <script src="_js/jquery-351.js" type="text/javascript"></script>
 
         <script src="_js/menu.js" type="text/javascript"></script>
+        <script src="_js/dragdrop.js" type="text/javascript"></script>
         <script src="_js/funcoes.js" type="text/javascript"></script>
 
         <!-- Bootstrap CSS CDN v-->
@@ -139,17 +140,23 @@
                 <!-- Page Content  -->
                 <div id="content">
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
                         <div class="container-fluid">
-
+ <!--id="menu_favoritos" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"-->
                             <button type="button" id="sidebarCollapse" class="btn btn-info">
                                 <i class="fas fa-align-left"></i>
                                 <span>Recolher</span>
                             </button>
+                            <div class="btn btn-default" id="menu_trash" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
+                                <input type=image src="images/trash.jpg" width="45" height="30" hidden="true"> 
+                            </div>    
+                            
+                            
+ <!--
                             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <i class="fas fa-align-justify"></i>
-                            </button>
-
+                            </button> 
+-->
                             <?php echo include("buscamenuatalho.php"); ?>
 
 
