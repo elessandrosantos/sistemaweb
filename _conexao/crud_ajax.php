@@ -39,14 +39,16 @@ switch ($acao):
 
     case 'excluir':
         $csql = "DELETE FROM " . $tabela . " WHERE " . $where;
-        $excluirdados = $conn->prepare($cqsl);
+        $excluirdados = $conn->prepare($csql);
         if ($excluirdados->execute()) {
-            
+            echo(" Registro Apagado");            
+        }else{
+            echo(" Falha ao remover");            
         }
 
     case 'obter':
         $csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;
-        $selectdados = $conn->prepare($cqsl);
+        $selectdados = $conn->prepare($csql);
         if ($selectdados->execute()) {
             return $selectdados;
         }

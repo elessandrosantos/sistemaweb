@@ -10,7 +10,7 @@ if(empty($cped)){
    $cwhereform = '';
     
    $ctpped = "PS";
-   $cped   = $ctpped . '00000000001';
+   $cped   = $ctpped . '00000001';
    $cdata  = '';
    $cusuario = '';            
    $cempresa = '';
@@ -180,7 +180,9 @@ echo $cwhereform;
         <div class="tab-content">
            
             <div id="abaItens" class="tab-pane container-fluid active">  
-                
+                <div class="row">
+                    <a class="btn btn-success" href="index.php?p=dlgitenspedserv">Incluir Itens</a>
+                </div>    
                 <div class="margin-top-sm table-responsive"> 
                     <table class="table table-striped table-bordered">                        
                         <thead>
@@ -215,9 +217,11 @@ echo $cwhereform;
                                 <td onblur="saveToDatabase(this, 'descr_item', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['descr_item']; ?></td>
                                 <td onblur="saveToDatabase(this, 'quant', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['quant']; ?></td>
                                 <td onblur="saveToDatabase(this, 'valor_unit', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['valor_unit']; ?></td>                                
-                                <td onblur="saveToDatabase(this, 'valor_tot', <?php echo $row['regid']; ?>)" onclick="editRow(this);"> <?php echo $row['valor_tot']; ?></td>                               
-                                <td><a class="ajax-action-links" onclick="index.php?p=dlgitenspedserv&id=(<?php echo $row['regid']; ?>);">Alterar</a></td>
-                                <td><a class="ajax-action-links" onclick="deleteRecord(<?php echo $row['regid']; ?>);">Deletar</a></td>
+                                <td onblur="saveToDatabase(this, 'valor_tot', <?php echo $row['regid']; ?>)" onclick="editRow(this);"> <?php echo $row['valor_tot']; ?></td>
+                                <td>
+                                   <a class="ajax-action-links btn btn-success" onclick="index.php?p=dlgitenspedserv&id=(<?php echo $row['regid']; ?>);">Alterar</a>
+                                   <a class="ajax-action-links btn btn-success" onclick="deleteRecord(<?php echo $row['regid']; ?>);">Deletar</a>
+                                </td>
                             </tr>
                             <?php
                             }

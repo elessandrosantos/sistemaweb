@@ -20,7 +20,7 @@ class crud {
 
         $this->csql = "UPDATE" . $this->tabela . " SET " . $setdados . " WHERE " . $where;
 
-        $alterardados = $conn->prepare($this->cqsl);
+        $alterardados = $conn->prepare($this->csql);
 
         if ($alterardados->execute()) {
             
@@ -31,7 +31,7 @@ class crud {
 
         $this->csql = "DELETE FROM " . $this->tabela . " WHERE " . $where;
 
-        $excluirdados = $conn->prepare($this->cqsl);
+        $excluirdados = $conn->prepare($this->csql);
 
         if ($excluirdados->execute()) {
             

@@ -21,7 +21,9 @@ $sql = $con->prepare('SELECT           '.
                      'FROM             '.
                      '    menu_user    '.
                      'WHERE            '.
-                     '   user  = :usr  ');
+                     '   user  = :usr  '.
+                     'ORDER BY         '.
+                     '   regid         ');
 
 
 try {
@@ -43,7 +45,7 @@ $cRetMenu .= '<div class="collapse navbar-collapse" id="menu_favoritos" ondrop="
 
 foreach ($amenu as $row) {
     $cRetMenu .=  '<li class="nav-item active" draggable="true" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">'
-                  .' <a id='. $row['regid'] .' class="btn btn-primary btn-sm" href="' . $row['link'] .'">'.$row['descr'] .'</a> '
+                  .' <a id=favoritos_'. $row['regid'] .' class="btn btn-primary btn-sm" href="' . $row['link'] .'">'.$row['descr'] .'</a> '
                   .'</li>';
    $ltemmenu = TRUE; 
     
@@ -53,17 +55,11 @@ if(!$ltemmenu){
 
     $cRetMenu .=  '<li class="nav-item active">'
                   .'<a> <h7> <- Area para favoritos! </h7></a> '
-                  .'</li>';
-
-
-    
+                  .'</li>';    
 }
-
-
 
 $cRetMenu  .= '</ul>'
            .'</div>';
-
 
 Return $cRetMenu
 

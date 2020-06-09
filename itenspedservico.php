@@ -32,7 +32,7 @@ include $_SERVER['DOCUMENT_ROOT']."/_conexao/crud.php";
                      
                 <div class="row">
                     <div class="form-group col-md-3">   
-                        <label for="nmgetCodigoAnterior">Número</label>
+                        <label for="nmgetCodigoAnterior">Pedido</label>
                         <input type="text" class="form-control" value="<?php echo $cped; ?>" name="nmgetCodigoAnterior" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   

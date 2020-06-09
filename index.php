@@ -147,8 +147,8 @@
                                 <i class="fas fa-align-left"></i>
                                 <span>Recolher</span>
                             </button>
-                            <div class="btn btn-default" id="menu_trash" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
-                                <input type=image src="images/trash.jpg" width="45" height="30" hidden="true"> 
+                            <div class="btn btn-default" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
+                                <input id="menu_trash" type=image src="images/trash.jpg" width="45" height="30" hidden> <!--hidden="FALSE"> -->
                             </div>    
                             
                             
