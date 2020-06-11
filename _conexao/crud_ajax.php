@@ -17,6 +17,7 @@ switch ($acao):
     case 'inserir':
 
         $csql = "INSERT INTO " . $tabela . " (".$campos.") VALUES (".$valores.")";
+        echo ($csql);
         $adicionadadaos = $conn->prepare($csql);          
         try{
            if ($adicionadadaos->execute()) {

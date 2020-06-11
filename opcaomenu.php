@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 function opcaomenu($cmenu, $cparam) {
     
@@ -57,5 +57,3 @@ function opcaomenu($cmenu, $cparam) {
     
     return $ctela;
 }
-
-?>

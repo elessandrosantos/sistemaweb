@@ -4,7 +4,7 @@ function dragstart_handler(ev) {
   //alert("dragStart");
   
   var dti = ev.dataTransfer.items;
-  if (dti === undefined || dti == null) {
+  if (dti === undefined || dti === null) {
     alert("Browser does not support DataTransferItem interface");    
     return;
   }
@@ -36,7 +36,7 @@ function dragstart_handler(ev) {
 function dragover_handler(ev) {
   console.log("dragOver");  
   var dti = ev.dataTransfer.items;
-  if (dti === undefined || dti == null) {
+  if (dti === undefined || dti === null) {
     console.log("Browser does not support DataTransferItem interface");    
     return;
   }
@@ -51,7 +51,7 @@ function drop_handler(ev) {
   ev.preventDefault();
   var dti = ev.dataTransfer.items;
   
-  if (dti === undefined || dti == null) {
+  if (dti === undefined || dti === null) {
     alter("Browser does not support DataTransferItem interface");    
     return;
   }
@@ -66,7 +66,7 @@ function drop_handler(ev) {
       
    // alert("Drop: dti[i] [" + dti[i]+ "] Drop: item[" + i + "].kind = " + dti[i].kind + " ; item[" + i + "].type = " + dti[i].type);
    // alert("700" + "Drop: item[" + i + "].kind = " + dti[i].kind + " ; item[" + i + "].type = " + dti[i].type);
-    if ((dti[i].kind == 'string') && (dti[i].type.match('^text/menu'))) {
+    if ((dti[i].kind === 'string') && (dti[i].type.match('^text/menu'))) {
       // This item is the target node
       
         dti[i].getAsString(function (id){        
@@ -76,13 +76,13 @@ function drop_handler(ev) {
         var opcao = id;
         var textmenu =  opcao.substr(0,4);
 
-	if (textmenu == "menu" && ev.target.id == "menu_favoritos") {            
+	if (textmenu === "menu" && ev.target.id === "menu_favoritos") {            
 	   var nodeCopy = document.getElementById(id).cloneNode(true);
 	   nodeCopy.id = "newId";
 	   ev.target.appendChild(nodeCopy);           
            incluifavoritos(document.getElementById(id).name, 'EDSANTOS', document.getElementById(id));      
 	}
-        if (textmenu == "favo" && ev.target.id == "menu_trash") {
+        if (textmenu === "favo" && ev.target.id === "menu_trash") {
             
            var nid ;
            var n = opcao.indexOf("_"); 
@@ -105,7 +105,7 @@ function dragend_handler(ev) {
   //console.log("dragEnd");
   
   var dti = ev.dataTransfer.items;
-  if (dti === undefined || dti == null) {
+  if (dti === undefined || dti === null) {
     console.log("Browser does not support DataTransferItem interface");
     alert("Browser does not support DataTransferItem interface");
     return;
@@ -126,18 +126,19 @@ function dragend_handler(ev) {
 function incluifavoritos(cdescr, cuser, clink){
     
     var tabela = 'menu_user';
-    
+    var curl = window.location.href;
     var campos = "cod_menu, descr, user , sn_visivel, link";
     var dados = "'1', '"+cdescr+"', '"+ cuser + "', '1', '"+ clink +"'";
     var where = "";
-            
+     alert (curl);       
     
     $.ajax({
-       url: "/_conexao/crud_ajax.php",
+       url: "./_conexao/crud_ajax.php",
        type: "POST",
        data: 'acao=inserir' + '&tab=' + tabela + '&campos=' + campos + '&valores=' + dados + '&where=' + where,
        success: function (data) {   
-           alert("Menu favorito criado com sucesso!")
+           alert(data);
+           alert("Menu favorito criado com sucesso!");
         }
        });
   
@@ -148,10 +149,11 @@ function excluirfavoritos(id){
     
     var tabela = 'menu_user';    
     var where = 'regid = '+id;
+    var curl = window.location.href;
             
     
     $.ajax({
-       url: "/_conexao/crud_ajax.php",
+       url: "./_conexao/crud_ajax.php",
        type: "POST",
        data: 'acao=excluir' + '&tab=' + tabela + '&where=' + where,
        success: function (data) {               
