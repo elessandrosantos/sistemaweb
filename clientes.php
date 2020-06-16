@@ -1,6 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/_conexao/crud.php";
+include $_SESSION['pastaapp']."/_conexao/crud.php";
+
 ?>
 
 <html lang="en">
@@ -80,8 +81,7 @@ include $_SERVER['DOCUMENT_ROOT']."/_conexao/crud.php";
                         <div class="form-group col-md-3">   
                             <label for="nmcbxLogradouro">Logradouro</label>
                             <select name="LOGRA" class="form-control" id="idcbxLogradouro"><option>Logradouro</option>
-                            <?php
-                                $conn = conectar();                               
+                            <?php                                
                                 $ctab = "logradouros";
                                 $cccampo = "codigo, descr ";
                                 $cwhere = "1=1";                            

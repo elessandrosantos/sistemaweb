@@ -1,4 +1,4 @@
-<?php //include $_SERVER['DOCUMENT_ROOT']."/_conexao/conexao.php"; 
+<?php //include $_SESSION['pastaapp']."/_conexao/conexao.php"; 
 ?> <div class="container"> 
     <div class="row"><h3>Servicos</h3> 
     </div> 

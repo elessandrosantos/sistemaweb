@@ -7,7 +7,7 @@
 
         <?php
         
-        include_once $_SERVER['DOCUMENT_ROOT']."/_conexao/conexao.php";
+        include_once $_SESSION['pastaapp']."/_conexao/conexao.php";
         $conn = conectar();
 
 // RECEBENDO OS DADOS PREENCHIDOS DO FORMULÁRIO !

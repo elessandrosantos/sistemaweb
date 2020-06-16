@@ -66,8 +66,22 @@ function getdadosform(tabela, acao, idwhere) {
     var dadosinput = document.getElementsByTagName("INPUT");
     var dadosselect = document.getElementsByTagName("SELECT");
     var where = "";
-      alert(acao);
-      alert(idwhere);
+    //var vUrl = location.origin;
+    //var cloc = location.search;
+    //var vwin = window.location.href
+    //var pag = location.host;
+    //var pagna = location.hostname;
+    var cpagina = window.location.pathname;
+    var pos = 0;
+    
+    pos = cpagina.indexOf("/", 1);
+    cpagina = cpagina.substr(0, pos);
+    
+    alert("110");
+      //alert (acao);
+      //alert (idwhere);      
+      alert(cpagina);
+      
       
       
     switch (acao) {
@@ -117,8 +131,8 @@ function getdadosform(tabela, acao, idwhere) {
 
             // inserir - acao, tab, campos, valores, where 
 
-            $.ajax({
-                url: "/_conexao/crud_ajax.php",
+            $.ajax({                
+                url: cpagina+"/_conexao/crud_ajax.php",
                 type: "POST",
                 data: 'acao=inserir' + '&tab=' + tabela + '&campos=' + campos + '&valores=' + dados + '&where=' + where,
                 success: function (data) {
@@ -172,8 +186,9 @@ function getdadosform(tabela, acao, idwhere) {
             setdados = setdados.substr(0, setdados.length - 1);
             //dados = dados.substr(0, dados.length - 2);
             alert(setdados);
-            $.ajax({
-                url: "/_conexao/crud_ajax.php",
+            
+            $.ajax({                
+                url: cpagina+"/_conexao/crud_ajax.php",
                 type: "POST",
                 data: 'acao=alterar' + '&tab=' + tabela + '&setdados=' + setdados + '&where=' + where,
                 success: function (data) {               
@@ -188,3 +203,4 @@ function getdadosform(tabela, acao, idwhere) {
     }
 
 }
+

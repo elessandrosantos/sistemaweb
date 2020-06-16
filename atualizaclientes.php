@@ -3,9 +3,7 @@ session_start();
 
 $idcli = $_SESSION['param'];
 
-session_destroy();
-
-include $_SERVER['DOCUMENT_ROOT'] . "/_conexao/crud.php";
+include $_SESSION['pastaapp']. "/_conexao/crud.php";
 $conn = conectar();
 
 $ctab = "clientes";

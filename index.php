@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+
+$_SESSION['pastaapp'] = "";
+$route = filter_input(INPUT_SERVER, 'REQUEST_URI') ;
+
+$pos = strpos($route, '/', 1);
+if($pos > 0){
+   $cpasta = substr( $route , 0 , $pos );
+}else{
+    $cpasta = "";    
+}   
+$_SESSION['pastaapp'] = $_SERVER['DOCUMENT_ROOT'].$cpasta;
+
+//$_SESSION['pastaapp'] = filter_input(INPUT_SERVER, 'DOCUMENT_ROOT').$cpasta;
+
+?>
+
 <!DOCTYPE html>
 <html>
 

@@ -12,6 +12,10 @@ $csql = "";
 require_once "conexao.php";
 $conn = conectar();
 
+
+$tabela = strtolower($tabela);
+
+
 switch ($acao):
 
     case 'inserir':
@@ -28,31 +32,43 @@ switch ($acao):
         } catch(PDOException $e){           
            echo $e->getMessage();
          }
+        break;
 
     case 'alterar':
         $csql = "UPDATE " . $tabela . " SET " . $setdados . " WHERE " . $where;        
+        
+        echo ($csql);
+        
         $alterardados = $conn->prepare($csql);
         if ($alterardados->execute()) {
            echo "Cadastro Atualizado";
         }else{
            echo "Falha ao Atualizar"; 
         }
+        break;        
 
     case 'excluir':
         $csql = "DELETE FROM " . $tabela . " WHERE " . $where;
+        
+        //echo ($csql);
+        
         $excluirdados = $conn->prepare($csql);
         if ($excluirdados->execute()) {
             echo(" Registro Apagado");            
         }else{
             echo(" Falha ao remover");            
         }
+        break;        
 
     case 'obter':
         $csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;
+        
+        //echo $csql;
         $selectdados = $conn->prepare($csql);
         if ($selectdados->execute()) {
             return $selectdados;
         }
+        break;        
 
 endswitch;
 

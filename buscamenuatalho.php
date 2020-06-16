@@ -1,6 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT']."/_conexao/conexao.php"; 
+
+include_once $_SESSION['pastaapp']."/_conexao/conexao.php"; 
 
 $cRetMenu = "";
 

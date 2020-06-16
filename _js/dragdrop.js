@@ -125,20 +125,17 @@ function dragend_handler(ev) {
 
 function incluifavoritos(cdescr, cuser, clink){
     
-    var tabela = 'menu_user';
-    var curl = window.location.href;
+    var tabela = 'menu_user';    
     var campos = "cod_menu, descr, user , sn_visivel, link";
     var dados = "'1', '"+cdescr+"', '"+ cuser + "', '1', '"+ clink +"'";
-    var where = "";
-     alert (curl);       
+    var where = "";        
     
     $.ajax({
-       url: "./_conexao/crud_ajax.php",
+       url: "/_conexao/crud_ajax.php",
        type: "POST",
        data: 'acao=inserir' + '&tab=' + tabela + '&campos=' + campos + '&valores=' + dados + '&where=' + where,
        success: function (data) {   
-           alert(data);
-           alert("Menu favorito criado com sucesso!");
+           alert(data);           
         }
        });
   
@@ -149,18 +146,14 @@ function excluirfavoritos(id){
     
     var tabela = 'menu_user';    
     var where = 'regid = '+id;
-    var curl = window.location.href;
-            
     
     $.ajax({
-       url: "./_conexao/crud_ajax.php",
+       url: "/_conexao/crud_ajax.php",
        type: "POST",
        data: 'acao=excluir' + '&tab=' + tabela + '&where=' + where,
        success: function (data) {               
            alert(data);
         }
        });
-  
-    
 }
 

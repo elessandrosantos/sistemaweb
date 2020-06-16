@@ -1,6 +1,6 @@
 <?php
 
-//include ($_SERVER['DOCUMENT_ROOT'].'/_include/functions.php');
+//include ($_SESSION['pastaapp'].'/_include/functions.php');
             
 
 // define valores padr�o para diretivas do php.ini

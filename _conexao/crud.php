@@ -6,7 +6,7 @@ class crud {
     private $csql = "";
     
     public function inserir($campos, $valores) {
-
+        $this->tabela = strtolower($this->tabela);
         $this->csql = "INSERT INTO " . $this->tabela . " ($campos) VALUES ($valores)";
 
         $adicionadadaos = $conn->prepare($this->cqsl);
@@ -18,6 +18,7 @@ class crud {
 
     public function alterar($setdados, $where) {
 
+        $this->tabela = strtolower($this->tabela);   
         $this->csql = "UPDATE" . $this->tabela . " SET " . $setdados . " WHERE " . $where;
 
         $alterardados = $conn->prepare($this->csql);
@@ -29,8 +30,10 @@ class crud {
 
     public function excluir($where) {
 
+        $this->tabela = strtolower($this->tabela);
+        
         $this->csql = "DELETE FROM " . $this->tabela . " WHERE " . $where;
-
+        
         $excluirdados = $conn->prepare($this->csql);
 
         if ($excluirdados->execute()) {
@@ -40,8 +43,10 @@ class crud {
 
     public function obter($campos, $tabela, $where) {
        
-       include $_SERVER['DOCUMENT_ROOT']."/conexao.php"; 
+       include_once $_SESSION['pastaapp']."/conexao.php"; 
        $conn = conectar();
+       
+       $tabela = strtolower($tabela);
        
        $this->csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;        
        $selectdados = $conn->prepare($this->csql);

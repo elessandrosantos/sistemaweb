@@ -1,7 +1,7 @@
 <?php
 
 
-include "php_config.php";
+include_once "php_config.php";
 
 function getConfig( $configName )
 {
@@ -14,6 +14,7 @@ function getConfig( $configName )
        $cPath      = substr($_SERVER['DOCUMENT_ROOT'],0, (strlen($_SERVER['DOCUMENT_ROOT'])-3));   
     }
     $configFile =  $cPath.'config.ini';
+    
     $config = parse_ini_file( $configFile, true );
 
     list( $section, $param ) = explode( '.', $configName );

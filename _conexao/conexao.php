@@ -1,8 +1,12 @@
 <?php
-
+ if ( session_status() !== PHP_SESSION_ACTIVE )
+ {
+    session_start();
+}
+$Sql = FALSE;
 function conectar(){
-   
-   include_once $_SERVER['DOCUMENT_ROOT']."/init.php";
+   $Sql = FALSE;
+    require_once $_SESSION['pastaapp']."/init.php";
      
    if((substr($_SERVER['DOCUMENT_ROOT'],0,1)=="C") || (substr($_SERVER['DOCUMENT_ROOT'],0,1)=="D")){ 
       $cAmbiente = 'L';
