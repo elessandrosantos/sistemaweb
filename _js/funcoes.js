@@ -60,7 +60,7 @@ $(function () {
 });
 
 function getdadosform(tabela, acao, idwhere) {
-    
+
     var campos = "";
     var dados = "'";
     var dadosinput = document.getElementsByTagName("INPUT");
@@ -73,69 +73,86 @@ function getdadosform(tabela, acao, idwhere) {
     //var pagna = location.hostname;
     var cpagina = window.location.pathname;
     var pos = 0;
-    
+
     pos = cpagina.indexOf("/", 1);
     cpagina = cpagina.substr(0, pos);
-    
-      //alert (acao);
-      //alert (idwhere);      
-      
+
+    //alert (acao);
+    //alert (idwhere);      
+
     switch (acao) {
         case 'inserir':
             for (var i = 0; i < dadosinput.length; i++) {
                 var item = dadosinput[i];
 
                 if (item.type == "checkbox") {
-                    if (item.checked) {
-                        campos += item.name + ", ";
-                        dados += 1 + "','";
-                    } else {
-                        campos += item.name + ", ";
-                        dados += 0 + "','";
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+                        if (item.checked) {
+                            campos += item.name + ", ";
+                            dados += 1 + "','";
+                        } else {
+                            campos += item.name + ", ";
+                            dados += 0 + "','";
+                        }
                     }
                 }
 
                 if (item.type == "text") {
-                    campos += item.name + ", ";
-                    dados += item.value + "','";
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+                        campos += item.name + ", ";
+                        dados += item.value + "','";
+                    }
 
                 }
-                
+
                 if (item.type == "date") {
-                    campos += item.name + ", ";
-                    dados += item.value + "','";
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+
+                        campos += item.name + ", ";
+                        dados += item.value + "','";
+                    }
 
                 }
-                
+
 
                 if (item.type == "email") {
-                    campos += item.name + ", ";
-                    dados += item.value + "','";
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
 
+                        campos += item.name + ", ";
+                        dados += item.value + "','";
+                    }
                 }
                 if (item.type == "number") {
-                    campos += item.name + ", ";
-                    dados += item.value + "','";
-
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+                        campos += item.name + ", ";
+                        dados += item.value + "','";
+                    }
                 }
 
             }
             // Faz o loop para os dados de select
             for (var i = 0; i < dadosselect.length; i++) {
-               var item = dadosselect[i];
+                var item = dadosselect[i];
+                pos = item.name.indexOf("#", 0);
+                if (pos < 0) {
 
-                  campos += item.name + ", ";
-                  dados += item.value + "','";
-
+                    campos += item.name + ", ";
+                    dados += item.value + "','";
+                }
             }
-            
+
             campos = campos.substr(0, campos.length - 2);
             dados = dados.substr(0, dados.length - 2);
 
             // inserir - acao, tab, campos, valores, where 
 
-            $.ajax({                
-                url: cpagina+"/_conexao/crud_ajax.php",
+            $.ajax({
+                url: cpagina + "/_conexao/crud_ajax.php",
                 type: "POST",
                 data: 'acao=inserir' + '&tab=' + tabela + '&campos=' + campos + '&valores=' + dados + '&where=' + where,
                 success: function (data) {
@@ -146,72 +163,95 @@ function getdadosform(tabela, acao, idwhere) {
             break;
 
         case 'alterar':
-        
+
             where = idwhere;
-            where = where.replace(/#/g, "'");  
-            
+            where = where.replace(/#/g, "'");
+
             var setdados = "";
-            
+
             for (var i = 0; i < dadosinput.length; i++) {
                 var item = dadosinput[i];
+                pos = item.name.indexOf("#", 0);
+                if (pos < 0) {
 
-                if (item.type == "checkbox") {
-                    alert
-                    if (item.checked) {
-                        setdados += item.name + "='" + 1 + "'," ;
-                    } else {
-                        setdados += item.name + "='" + 0 + "'," ;
+                    if (item.type == "checkbox") {
+
+                        if (item.checked) {
+                            setdados += item.name + "='" + 1 + "',";
+                        } else {
+                            setdados += item.name + "='" + 0 + "',";
+                        }
                     }
                 }
 
                 if (item.type == "text") {
-                    setdados += item.name + "='" + item.value + "'," ;
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+
+                        setdados += item.name + "='" + item.value + "',";
+                    }
                 }
 
                 if (item.type == "date") {
-                   setdados += item.name + "='" + item.value + "'," ;
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+
+                        setdados += item.name + "='" + item.value + "',";
+                    }
                 }
 
 
                 if (item.type == "email") {
-                    setdados += item.name + "='" + item.value + "'," ;
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+
+                        setdados += item.name + "='" + item.value + "',";
+                    }
                 }
                 if (item.type == "number") {
-                    setdados += item.name + "='" + item.value + "'," ;
+                    pos = item.name.indexOf("#", 0);
+                    if (pos < 0) {
+
+                        setdados += item.name + "='" + item.value + "',";
+                    }
                 }
 
             }
-            
+
             // Faz o loop para os dados de select
             for (var i = 0; i < dadosselect.length; i++) {
-               var item = dadosselect[i];
-             //     alert(item.name);
-             //     alert(item.value);
-                  setdados += item.name + "='" + item.value + "'," ;
-                  //campos += item.name + ", ";
-                  //dados += item.value + "','";
+                var item = dadosselect[i];
+                //     alert(item.name);
+                //     alert(item.value);
+                pos = item.name.indexOf("#", 0);
+                if (pos < 0) {
+
+                    setdados += item.name + "='" + item.value + "',";
+                }
+                //campos += item.name + ", ";
+                //dados += item.value + "','";
 
             }
- 
-            
+
+
 
             setdados = setdados.substr(0, setdados.length - 1);
             //dados = dados.substr(0, dados.length - 2);
-          //  alert(setdados);
-            
-            $.ajax({                
-                url: cpagina+"/_conexao/crud_ajax.php",
+            //  alert(setdados);
+
+            $.ajax({
+                url: cpagina + "/_conexao/crud_ajax.php",
                 type: "POST",
                 data: 'acao=alterar' + '&tab=' + tabela + '&setdados=' + setdados + '&where=' + where,
-                success: function (data) {               
+                success: function (data) {
                     alert(data);
                     alert('Cadastro Atualizado');
                 }
             });
             break;
         default:
-            alert("Nenhuma função definipara para a acão"+ acao + "!");
-       
+            alert("Nenhuma função definipara para a acão" + acao + "!");
+
     }
 
 }

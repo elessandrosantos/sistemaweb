@@ -1,10 +1,13 @@
 <?php
 
 $cped = $_SESSION['npedido'];
+$nregid = $_SESSION['param'];
+
+$_SESSION['param'] = "";
 
 include $_SESSION['pastaapp']."/_conexao/crud.php";
 
-if(empty($cped)){
+if(empty($cped) || empty($nregid)){
     
    $acao = 'inserir';
    $cwhereform = '';
@@ -28,7 +31,7 @@ if(empty($cped)){
 }else{
   
    $acao = 'alterar';
-   $cwhereform = "PED=#" . $cped . "#";
+   $cwhereform = "REGID=#" . $nregid . "#";
     
    $conn = conectar();
    
@@ -36,6 +39,7 @@ if(empty($cped)){
    $cccampo =  "codigo,descr_item,quant,valor_unit,VALOR_COF,VALOR_PIS,COD_SERV_CID, ";
    $cccampo .= "AL_COFINS,AL_PIS,AL_ISS,AL_IR,VALOR_IR,VALOR_ISS,SEQ_ITEM,OBS,valor_desc ";
    $cwhere = " A.PED = '" . $cped . "'";
+   $cwhere .= " and A.regid = " . $nregid ;   
    $res = new crud();
    $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -63,6 +67,7 @@ if(empty($cped)){
 echo $acao;
 echo $cwhereform;
 echo $cped;
+echo $cdescritem;
 
 ?>
 <!DOCTYPE html>
@@ -111,7 +116,7 @@ echo $cped;
                                 $res = new crud();
                                 $aret = $res->obter($cccampo, $ctab, $cwhere, $corder);
                                 foreach ($aret as $row) {
-                                    $cdescritem = $row['descr'];
+                                   // $cdescritem = $row['descr'];
                                 ?> 
                                    <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
                                 <?php
@@ -122,7 +127,7 @@ echo $cped;
            </div> 
            <div class="form-group col-md-6">   
               <label for="nmgetRazaoSocial">Descrição</label>
-              <input type="number" class="form-control" name="DESCR_ITEM" id="idgetRazaoSocial"  value="<?php echo $cdescritem; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="text" class="form-control" name="DESCR_ITEM" id="idgetRazaoSocial"  value="<?php echo $cdescritem; ?>" size="60" maxlength="60" placeholder=""/>
            </div> 
 
            <div class="form-group col-md-2">   
@@ -133,15 +138,15 @@ echo $cped;
         <div class="row">
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Valor Unitário</label>
-              <input type="number" class="form-control" name="VALOR_UNIT" id="idgetRazaoSocial" value="<?php echo $nval_unit; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="number" class="form-control" name="VALOR_UNIT" step="0.01" id="idgetRazaoSocial" value="<?php echo $nval_unit; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Desconto</label>
-              <input type="number" class="form-control" name="VALOR_DESC" id="idgetRazaoSocial" value="<?php echo $ndesconto; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="number" class="form-control" name="VALOR_DESC" step="0.01" id="idgetRazaoSocial" value="<?php echo $ndesconto; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Valor Total</label>
-              <input type="number" class="form-control" name="VALOR_TOT" id="idgetRazaoSocial" value="<?php echo $ntot; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="number" class="form-control" name="#VALOR_TOT" readonly id="idgetRazaoSocial" value="<?php echo $ntot; ?>" size="60" maxlength="60" placeholder=""/>
            </div> 
         </div>                     
         <div class="row">                   
@@ -183,7 +188,7 @@ echo $cped;
 
                             $ctab    = "mov_peds A";
                             $cccampo = "A.regid, A.seq_item, A.codigo, A.descr_item, A.quant, A.valor_unit, A.valor_unit * A.quant AS valor_tot ";                            
-                            $cwhere .= " AND A.PED = '" . $cped . "'";                            
+                            $cwhere = " A.PED = '" . $cped . "'";                            
                             $res = new crud();
                             $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -196,8 +201,7 @@ echo $cped;
                                 <td onblur="saveToDatabase(this, 'descr_item', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['descr_item']; ?></td>
                                 <td onblur="saveToDatabase(this, 'quant', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['quant']; ?></td>
                                 <td onblur="saveToDatabase(this, 'valor_unit', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['valor_unit']; ?></td>                                
-                                <td onblur="saveToDatabase(this, 'valor_tot', <?php echo $row['regid']; ?>)" onclick="editRow(this);"> <?php echo $row['valor_tot']; ?></td>                               
-                                <td><a class="ajax-action-links" onclick="index.php?p=dlgitenspedserv&id=(<?php echo $row['regid']; ?>);">Alterar</a></td>
+                                <td onblur="saveToDatabase(this, 'valor_tot', <?php echo $row['regid']; ?>)" onclick="editRow(this);"> <?php echo $row['valor_tot']; ?></td>                                                               
                                 <td><a class="ajax-action-links" onclick="deleteRecord(<?php echo $row['regid']; ?>);">Deletar</a></td>
                             </tr>
                             <?php
@@ -213,19 +217,19 @@ echo $cped;
                 <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmcbxBanco">Aliq. ISS</label>
-                        <input type="text" class="form-control" name="ALIQ_ISS" id="idgetCobranca" value="<?php echo $naliq_iss; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="AL_ISS" id="idgetCobranca" value="<?php echo $naliq_iss; ?>" size="1" maxlength="1" placeholder=""/>
                     </div>
                     <div class="form-group col-md-3">   
                         <label for="nmgetCobranca">Aliq. IR</label>
-                        <input type="text" class="form-control" name="ALIQ_IR" id="idgetCobranca" value="<?php echo $naliq_ir; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="AL_IR" id="idgetCobranca" value="<?php echo $naliq_ir; ?>" size="1" maxlength="1" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetJuros">Aliq. Pis</label>
-                        <input type="text" class="form-control" name="ALIQ_PIS" id="idgetJuros" value="<?php echo $naliq_pis; ?>" size="6" maxlength="6" placeholder=""/>
+                        <input type="text" class="form-control" name="AL_PIS" id="idgetJuros" value="<?php echo $naliq_pis; ?>" size="6" maxlength="6" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetTolerancia">Aliq. Cofins</label>
-                        <input type="number" class="form-control" name="ALIQ_COFINS" id="idgetTolerancia" value="<?php echo $naliq_cof; ?>" size="5" maxlength="5" placeholder=""/>
+                        <input type="number" class="form-control" name="AL_COFINS" id="idgetTolerancia" value="<?php echo $naliq_cof; ?>" size="5" maxlength="5" placeholder=""/>
                     </div> 
                  </div>    
                  <div class="row">
@@ -243,14 +247,14 @@ echo $cped;
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetTolerancia">Valor Cofins</label>
-                        <input type="number" class="form-control" name="VALOR_COFINS" id="idgetTolerancia" value="<?php echo $nval_cof; ?>" size="5" maxlength="5" placeholder=""/>
+                        <input type="number" class="form-control" name="VALOR_COF" id="idgetTolerancia" value="<?php echo $nval_cof; ?>" size="5" maxlength="5" placeholder=""/>
                     </div> 
                  </div> 
                 
                 <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmcbxBanco">Codigo de Serviço</label>
-                        <input type="text" class="form-control" name="nmgetCobranca" id="idgetCobranca" value="<?php echo $ntot; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="COD_SERV_CID" id="idgetCobranca" value="<?php echo $$ncodserv; ?>" size="1" maxlength="1" placeholder=""/>
                     </div>
                 </div>    
             </div>
@@ -268,3 +272,4 @@ echo $cped;
         </div> 
     </main>
 </html>
+

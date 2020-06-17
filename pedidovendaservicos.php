@@ -229,7 +229,7 @@ echo $cwhereform;
                                 <td onblur="saveToDatabase(this, 'valor_unit', <?php echo $row['regid']; ?>)" onclick="editRow(this);" contenteditable="true"><?php echo $row['valor_unit']; ?></td>                                
                                 <td onblur="saveToDatabase(this, 'valor_tot', <?php echo $row['regid']; ?>)" onclick="editRow(this);"> <?php echo $row['valor_tot']; ?></td>
                                 <td>
-                                   <a class="ajax-action-links btn btn-success" onclick="index.php?p=dlgitenspedserv&id=(<?php echo $row['regid']; ?>);">Alterar</a>
+                                    <a a class="btn btn-success" href="index.php?p=dlgitenspedserv&id=<?php echo $row['regid'];?>">Alterar</a>                                   
                                    <a class="ajax-action-links btn btn-success" onclick="deleteRecord(<?php echo $row['regid']; ?>);">Deletar</a>
                                 </td>
                             </tr>
