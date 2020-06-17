@@ -7,6 +7,7 @@ function opcaomenu($cmenu, $cparam) {
         $ctela = 'pesqservicos.php';
     }
     if ($cmenu == "dlgservicos") {
+        $_SESSION['param'] = $cparam;
         $ctela = 'servicos.php';
     }
     if ($cmenu == "dlgpesqprodutos") {

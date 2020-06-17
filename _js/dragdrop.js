@@ -128,18 +128,26 @@ function incluifavoritos(cdescr, cuser, clink){
     var tabela = 'menu_user';    
     var campos = "cod_menu, descr, user , sn_visivel, link";
     var dados = "'1', '"+cdescr+"', '"+ cuser + "', '1', '"+ clink +"'";
-    var where = "";        
+    var where = ""; 
     
+    var cpagina = window.location.pathname;
+    var pos = 0;
+    
+    pos = cpagina.indexOf("/", 1);
+    cpagina = cpagina.substr(0, pos);
+      
     $.ajax({
-       url: "/_conexao/crud_ajax.php",
+       url: cpagina+"/_conexao/crud_ajax.php",
        type: "POST",
        data: 'acao=inserir' + '&tab=' + tabela + '&campos=' + campos + '&valores=' + dados + '&where=' + where,
        success: function (data) {   
+       //    alert("100");
+       //    alert(cpagina);
+
            alert(data);           
         }
        });
   
-    
 }
 
 function excluirfavoritos(id){
@@ -147,11 +155,21 @@ function excluirfavoritos(id){
     var tabela = 'menu_user';    
     var where = 'regid = '+id;
     
+    var cpagina = window.location.pathname;
+    var pos = 0;
+    
+    pos = cpagina.indexOf("/", 1);
+    cpagina = cpagina.substr(0, pos);
+    
+    
+    
     $.ajax({
-       url: "/_conexao/crud_ajax.php",
+       url: cpagina+"/_conexao/crud_ajax.php",
        type: "POST",
        data: 'acao=excluir' + '&tab=' + tabela + '&where=' + where,
-       success: function (data) {               
+       success: function (data) { 
+         //  alert("200");
+         //  alert(cpagina);
            alert(data);
         }
        });

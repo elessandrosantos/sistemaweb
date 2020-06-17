@@ -1,5 +1,5 @@
 
-<div class="container"> 
+<div class="container-fluid"> 
     <div class="row"><h3>Clientes</h3> 
     </div> 
     <div> 

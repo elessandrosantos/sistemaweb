@@ -35,29 +35,29 @@ If ($_POST) {
 }
 ?>
 <form id="fpesqped" name="formnomepesqped   " method="post" />
-    <main class="container">
+    <main class="container-fluid">
         
         <div class="row"><h3>Pesquisa de Pedido de Serviços</h3> 
         </div> 
-        <div> 
-            <div class="row"> 
-                <div class="form-group col-md-3"> 
-                    <label for="nmgetpesquisa">Pedido</label> 
-                    <input type="text" class="form-control" name="pesqpedido" id="idgetpesquisa" size="20" maxlength="100" placeholder="Numero do Pedido"/> 
+        <div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="nmgetpesquisa">Pedido</label>
+                    <input type="text" class="form-control" name="pesqpedido" id="idgetpesquisa" size="20" maxlength="100" placeholder="Numero do Pedido"/>
                 </div>
-                <div class="form-group col-md-3"> 
-                    <label for="nmgetpesquisa">Cliente</label> 
-                    <input type="text" class="form-control" name="pesqcliente" id="idgetpesquisa" size="20" maxlength="100" placeholder="Nome do Cliente"/> 
-                </div> 
-                <div class="form-group col-md-2">            
-                    <label for="nmgetdata">Data</label> 
-                    <input type="date" class="form-control" name="pesqdata" id="idgetpesquisa" size="20" maxlength="100" placeholder="Data do Pedido"/> 
-                </div> 
-                <div class="form-group col-md-2">             
-                    <label for="nmgetpesquisa">Status</label> 
+                <div class="form-group col-md-3">
+                    <label for="nmgetpesquisa">Cliente</label>
+                    <input type="text" class="form-control" name="pesqcliente" id="idgetpesquisa" size="20" maxlength="100" placeholder="Nome do Cliente"/>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="nmgetdata">Data</label>
+                    <input type="date" class="form-control" name="pesqdata" id="idgetpesquisa" size="20" maxlength="100" placeholder="Data do Pedido"/>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="nmgetpesquisa">Status</label>
                     <input type="text" class="form-control" name="pesstatus" id="idgetpesquisa" size="20" maxlength="100" placeholder="Status do Pedido"/> 
-                </div>   
-                <div class="form-group col-md-2">                         
+                </div>
+                <div class="form-group col-md-2">
                     <input class="btn btn-success" name="nmbtnpesq" type="submit" id="idbtnSalvar" value="Pesquisar" /> 
                 </div>   
 

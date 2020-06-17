@@ -35,22 +35,28 @@ switch ($acao):
         break;
 
     case 'alterar':
+        
         $csql = "UPDATE " . $tabela . " SET " . $setdados . " WHERE " . $where;        
         
         echo ($csql);
         
         $alterardados = $conn->prepare($csql);
-        if ($alterardados->execute()) {
-           echo "Cadastro Atualizado";
-        }else{
-           echo "Falha ao Atualizar"; 
+        
+        try{
+           if ($alterardados->execute()) {
+               echo "Cadastro Atualizado";
+           }else{
+               echo "Falha ao Atualizar";
+           }
+        } catch(PDOException $e){           
+           echo $e->getMessage();
         }
         break;        
 
     case 'excluir':
         $csql = "DELETE FROM " . $tabela . " WHERE " . $where;
         
-        //echo ($csql);
+      //  echo ($csql);
         
         $excluirdados = $conn->prepare($csql);
         if ($excluirdados->execute()) {

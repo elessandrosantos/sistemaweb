@@ -77,12 +77,8 @@ function getdadosform(tabela, acao, idwhere) {
     pos = cpagina.indexOf("/", 1);
     cpagina = cpagina.substr(0, pos);
     
-    alert("110");
       //alert (acao);
       //alert (idwhere);      
-      alert(cpagina);
-      
-      
       
     switch (acao) {
         case 'inserir':
@@ -104,6 +100,13 @@ function getdadosform(tabela, acao, idwhere) {
                     dados += item.value + "','";
 
                 }
+                
+                if (item.type == "date") {
+                    campos += item.name + ", ";
+                    dados += item.value + "','";
+
+                }
+                
 
                 if (item.type == "email") {
                     campos += item.name + ", ";
@@ -145,8 +148,10 @@ function getdadosform(tabela, acao, idwhere) {
         case 'alterar':
         
             where = idwhere;
+            where = where.replace(/#/g, "'");  
             
             var setdados = "";
+            
             for (var i = 0; i < dadosinput.length; i++) {
                 var item = dadosinput[i];
 
@@ -163,6 +168,11 @@ function getdadosform(tabela, acao, idwhere) {
                     setdados += item.name + "='" + item.value + "'," ;
                 }
 
+                if (item.type == "date") {
+                   setdados += item.name + "='" + item.value + "'," ;
+                }
+
+
                 if (item.type == "email") {
                     setdados += item.name + "='" + item.value + "'," ;
                 }
@@ -175,9 +185,11 @@ function getdadosform(tabela, acao, idwhere) {
             // Faz o loop para os dados de select
             for (var i = 0; i < dadosselect.length; i++) {
                var item = dadosselect[i];
-
-                  campos += item.name + ", ";
-                  dados += item.value + "','";
+             //     alert(item.name);
+             //     alert(item.value);
+                  setdados += item.name + "='" + item.value + "'," ;
+                  //campos += item.name + ", ";
+                  //dados += item.value + "','";
 
             }
  
@@ -185,7 +197,7 @@ function getdadosform(tabela, acao, idwhere) {
 
             setdados = setdados.substr(0, setdados.length - 1);
             //dados = dados.substr(0, dados.length - 2);
-            alert(setdados);
+          //  alert(setdados);
             
             $.ajax({                
                 url: cpagina+"/_conexao/crud_ajax.php",

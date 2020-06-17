@@ -23,18 +23,19 @@ if(empty($cped)){
    $cobs1 = '';
    $ndesconto = '';
    $nacrescimo = '';
-    
+   $cnmcliente = 'Informe o Cliente'    ;
+   
 }else{
   
    $acao = 'alterar';
-   $cwhereform = "PED='" . $cped . "'";
+   $cwhereform = 'PED=#'. $cped. '#' ;
     
    $conn = conectar();
 
-   $ctab = "PEDIDOS A, CLIENTES B";
-   $cccampo = "A.aberta, A.usuario, A.empresa, A.cod_cli, B.nome, A.cod_con, A.cod_ser, A.seu_ped, A.doc_fiscal, A.obs1, A.obs2 ";
-   $cccampo .= ", A.desconto, A.acrescimo";
-   $cwhere = "A.cod_cli = B.xclientes";
+   $ctab = "pedidos A, clientes B, condicoes C, operacoes D";
+   $cccampo = "A.aberta, A.usuario, A.cod_emp, A.cod_cli, B.nome, A.cod_con, A.cod_ser, A.seu_ped, A.doc_fiscal, A.obs1, A.obs2 ";
+   $cccampo .= ", A.desconto, A.acrescimo, C.descr as descrcond, D.descr as descroper";
+   $cwhere = "A.cod_cli = B.xclientes AND A.cod_con = c.codigo AND A.cod_ser = d.codigo";
    $cwhere .= " and A.PED = '" . $cped . "'";
    $res = new crud();
    $aret = $res->obter($cccampo, $ctab, $cwhere);
@@ -44,11 +45,13 @@ if(empty($cped)){
       
       $cdata  = $row['aberta'];
       $cusuario = $row['usuario'];            
-      $cempresa = $row['empresa'];
+      $cempresa = $row['cod_emp'];
       $ccliente = $row['cod_cli'];
       $cnmcliente = $row['nome'];
       $ccondpagto = $row['cod_con'];
+      $cconddescr = $row['descrcond'];
       $ctpoperacao = $row['cod_ser'];
+      $ctpoperdesc = $row['descroper'];
       $cseupedido = $row['seu_ped'];
       $cdoc_fiscal = $row['doc_fiscal'];
       $cobs = $row['obs1'];
@@ -65,7 +68,7 @@ echo $cwhereform;
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
     <head>
         <title>Pedido</title>
@@ -78,11 +81,15 @@ echo $cwhereform;
 
 
     </head>
-<form id="fped" name="formnomepediserv" method="post" onsubmit="return getdadosform('pedido', '<?php echo $acao;?>', '<?php echo $cwhereform;?>'); return false;">
+<form id="fped" name="formnomepediserv" method="post" onsubmit="return getdadosform('pedidos', '<?php echo $acao;?>', '<?php echo $cwhereform;?>'); return false;">
     <main class="container-fluid">            
             <div class="form-group col-md-12"> 
                 <h5> Pedido </h5>
             </div>  
+            <div style="display: none;"> <!-- Botão sem ação para evitar a tecla enter -->
+                <input type="submit" name="prevent-enter-submit" onclick="return false;">
+            </div>
+
             <div class="form-group col-md-5"> 
                 <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 
             </div> 
@@ -90,26 +97,27 @@ echo $cwhereform;
             <div class="row">
                <div class="form-group col-md-3">   
                   <label for="nmgetCodigoAnterior">Número</label>
-                  <input type="text" class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
+                  <input type="text" class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetPED" size="20" maxlength="20" placeholder=""/>
                </div> 
                <div class="form-group col-md-3">   
                   <label for="nmgetCNPJCPF">Data</label>
-                  <input type="date" class="form-control" value="<?php echo $cdata; ?>" name="ABERTA" id="idgetCNPJCPF" size="20" maxlength="20" placeholder=""/>
+                  <input type="date" class="form-control" value="<?php echo $cdata; ?>" name="ABERTA" id="idgetABERTA" size="20" maxlength="20" placeholder=""/>
                </div> 
                <div class="form-group col-md-3">   
                   <label for="nmgetRazaoSocial">Usuários</label>
-                  <input type="text" class="form-control" value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
+                  <input type="text" class="form-control" value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetUSUARIO" size="60" maxlength="60" placeholder=""/>
                </div> 
                <div class="form-group col-md-3">   
                   <label for="nmgetRazaoSocial">Empresa</label>
-                  <input type="text" class="form-control" value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
+                  <input type="text" class="form-control" value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetEMPRESA" size="60" maxlength="60" placeholder=""/>
                </div> 
 
              </div>                     
              <div class="row">                   
                 <div class="form-group col-md-6">   
                    <label for="nmgetNomeFantasia">Cliente</label>
-                   <select name="COD_CLI" class="form-control" id="idcbxcliente" value="<?php echo $codcli; ?>"><option>Informe o Cliente</option>
+                   <select name="COD_CLI" class="form-control" id="idcbxcliente" value="<?php echo $ccliente; ?>">
+                       <option value="<?php echo $ccliente; ?>"><?php echo $cnmcliente; ?></option>
                             <?php
                                 $conn = conectar();                               
                                 $ctab = "clientes";
@@ -128,7 +136,8 @@ echo $cwhereform;
 
                 <div class="form-group col-md-3">   
                    <label for="nmgetNomeFantasia">Cond. Parcelamento</label>                   
-                   <select name="COD_CON" class="form-control" value="<?php echo $ccondpagto; ?>" id="idcbxcoondicao" value="<?php echo $codcli; ?>"><option>Condição de Parcelamento</option>
+                   <select name="COD_CON" class="form-control" value="<?php echo $ccondpagto; ?>" id="idcbxcoondicao" value="<?php echo $ccondpagto; ?>">
+                       <option value="<?php echo $ccondpagto; ?>"><?php echo $cconddescr; ?></option>
                             <?php
                                 $conn = conectar();                               
                                 $ctab = "condicoes";
@@ -146,7 +155,8 @@ echo $cwhereform;
                 </div> 
                 <div class="form-group col-md-3">   
                    <label for="nmgetCEP">Tipo da Operação</label>
-                   <select name="COD_SER" class="form-control" id="idcbxoperacao" value="<?php echo $ctpoperacao; ?>"><option>Tipo da Operação</option>
+                   <select name="COD_SER" class="form-control" id="idcbxoperacao" value="<?php echo $ctpoperacao; ?>">
+                       <option value="<?php echo $ctpoperacao; ?>"><?php echo $ctpoperdesc; ?></option>
                             <?php
                                 $conn = conectar();                               
                                 $ctab = "operacoes";
@@ -236,15 +246,15 @@ echo $cwhereform;
                 <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmcbxBanco">Seu Pedido</label>
-                        <input type="text" class="form-control" value="<?php echo $cseupedido; ?>" name="SEU_PED" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" value="<?php echo $cseupedido; ?>" name="SEU_PED" id="idgetCobranca" size="20" maxlength="20" placeholder=""/>
                     </div>
                     <div class="form-group col-md-3">   
                         <label for="nmgetCobranca">Doc. Fiscal</label>
-                        <input type="text" class="form-control" value="<?php echo $cdoc_fiscal; ?>" name="DOC_FISCAL" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" value="<?php echo $cdoc_fiscal; ?>" name="DOC_FISCAL" id="idgetCobranca" size="10" maxlength="10" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-6">   
                         <label for="nmgetJuros">Observação</label>
-                        <input type="text" class="form-control" value="<?php echo $cobs; ?>" name="OBS" id="idgetJuros" size="6" maxlength="6" placeholder=""/>
+                        <input type="text" class="form-control" value="<?php echo $cobs; ?>" name="OBS" id="idgetJuros" size="5" maxlength="500" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetTolerancia">Desconto R$</label>

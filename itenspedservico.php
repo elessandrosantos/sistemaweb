@@ -4,9 +4,69 @@ $cped = $_SESSION['npedido'];
 
 include $_SESSION['pastaapp']."/_conexao/crud.php";
 
+if(empty($cped)){
+    
+   $acao = 'inserir';
+   $cwhereform = '';
+    
+   $ccod        = "";
+   $cdescritem  = "";
+   $nquant      = "";
+   $nval_unit   = "";
+   $nval_cof    = "";
+   $nval_pis    = "";
+   $nval_ir     = "";
+   $nval_iss    = "";
+   $nval_desc   = "";
+   $naliq_cof   = "";
+   $naliq_pis   = "";
+   $naliq_iss   = "";
+   $naliq_ir    = "";
+   $ncodserv    = "";
+   $cobs        = "";
+    
+}else{
+  
+   $acao = 'alterar';
+   $cwhereform = "PED=#" . $cped . "#";
+    
+   $conn = conectar();
+   
+   $ctab = "mov_peds A";
+   $cccampo =  "codigo,descr_item,quant,valor_unit,VALOR_COF,VALOR_PIS,COD_SERV_CID, ";
+   $cccampo .= "AL_COFINS,AL_PIS,AL_ISS,AL_IR,VALOR_IR,VALOR_ISS,SEQ_ITEM,OBS,valor_desc ";
+   $cwhere = " A.PED = '" . $cped . "'";
+   $res = new crud();
+   $aret = $res->obter($cccampo, $ctab, $cwhere);
+
+   foreach ($aret as $row) {
+
+      $ccod       = $row['codigo'];
+      $cdescritem = $row['descr_item'];
+      $nquant     = $row['quant']; 
+      $nval_unit  = $row['valor_unit'];
+      $nval_cof   = $row['VALOR_COF'];
+      $nval_pis   = $row['VALOR_PIS'];
+      $nval_ir    = $row['VALOR_IR'];
+      $nval_iss   = $row['VALOR_ISS'];
+      $nval_desc  = $row['valor_desc'];
+      $naliq_cof  = $row['AL_COFINS'];
+      $naliq_pis  = $row['AL_PIS'];
+      $naliq_iss  = $row['AL_ISS'];
+      $naliq_ir   = $row['AL_IR'];
+      $ncodserv   = $row['COD_SERV_CID'];
+      $cobs       = $row['OBS'];
+                                 
+   } 
+}
+
+echo $acao;
+echo $cwhereform;
+echo $cped;
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
     <head>
         <title>Pedido</title>
@@ -18,61 +78,81 @@ include $_SESSION['pastaapp']."/_conexao/crud.php";
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css"> -->
 
 
-    </head>        
+    </head>
+<form id="fped" name="formnomeitempedserv" method="post" onsubmit="return getdadosform('mov_peds', '<?php echo $acao ;?>', '<?php echo $cwhereform;?>'); return false;">    
     <main class="container-fluid">
-        <div class="row">     
-            <div class="form-group col-md-5"> 
-                <h5> Pedido </h5>
-            </div>  
-            <div class="form-group col-md-5">
-            </div> 
-            <div class="form-group col-md-5"> 
-                <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 
-            </div> 
-                     
-                <div class="row">
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetCodigoAnterior">Pedido</label>
-                        <input type="text" class="form-control" value="<?php echo $cped; ?>" name="nmgetCodigoAnterior" id="idgetCodigoAnterior" size="20" maxlength="20" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetCNPJCPF">Data</label>
-                        <input type="text" class="form-control" name="nmgetCNPJCPF" id="idgetCNPJCPF" size="20" maxlength="20" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetRazaoSocial">Usuários</label>
-                        <input type="text" class="form-control" name="nmgetRazaoSocial" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetRazaoSocial">Empresa</label>
-                        <input type="text" class="form-control" name="nmgetRazaoSocial" id="idgetRazaoSocial" size="60" maxlength="60" placeholder=""/>
-                    </div> 
+       <div class="row">     
+          <div class="form-group col-md-5"> 
+             <h5> Pedido </h5> 
+             <input type="text" readonly class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetped" size="20" maxlength="20" placeholder=""/>
+          </div>  
+          <div style="display: none;"> <!-- Botão sem ação para evitar a tecla enter -->
+             <input type="submit" name="prevent-enter-submit" onclick="return false;">
+          </div>
+           
+       </div>               
+       <div class="row">                  
+          <div class="form-group col-md-5"> 
+             <a class="btn btn-success" href="index.php?p=dlgpedvendaservicos&id=<?php echo $cped ;?>">Voltar</a>                               
+             <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 
+          </div> 
+        </div>    
+        <div class="row">
+           <div class="form-group col-md-4">   
+              <label for="nmgetCODIGO">Código</label>
+              <select name="CODIGO" class="form-control" id="idcbxcodigoitem" value="<?php echo $ccod; ?>">
+                       <option value="<?php echo $ccod; ?>"><?php echo $ccod; ?></option>
+                            <?php
+                                $conn = conectar();                               
+                                $ctab = "geral";
+                                $cccampo = "codigo, descr";
+                                $cwhere = " msp ='S' and ativo = 1";                            
+                                $corder = " order by descr ";
+                                $res = new crud();
+                                $aret = $res->obter($cccampo, $ctab, $cwhere, $corder);
+                                foreach ($aret as $row) {
+                                    $cdescritem = $row['descr'];
+                                ?> 
+                                   <option value="<?php echo $row['codigo'];?> "> <?php echo $row['descr'];?> </option>
+                                <?php
+                                }
+                                ?> 
+                   </select>   
+              
+           </div> 
+           <div class="form-group col-md-6">   
+              <label for="nmgetRazaoSocial">Descrição</label>
+              <input type="number" class="form-control" name="DESCR_ITEM" id="idgetRazaoSocial"  value="<?php echo $cdescritem; ?>" size="60" maxlength="60" placeholder=""/>
+           </div> 
 
-                </div>                     
-                <div class="row">                   
-                    <div class="form-group col-md-6">   
-                        <label for="nmgetNomeFantasia">Cliente</label>
-                        <input type="text" class="form-control" name="nmgetNomeFantasia" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
-                    </div> 
-
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetNomeFantasia">Cond. Parcelamento</label>
-                        <input type="text" class="form-control" name="nmgetNomeFantasia" id="idgetNomeFantasia" size="50" maxlength="50" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-3">   
-                        <label for="nmgetCEP">Tipo da Operacao</label>
-                        <input type="text" class="form-control" name="nmgetCEP" id="idgetCEP" size="10" maxlength="10" placeholder=""/>
-                    </div> 
-               
-                     </div>
-             </div>
+           <div class="form-group col-md-2">   
+              <label for="nmgetRazaoSocial">Quantidade</label>
+              <input type="number" class="form-control" name="QUANT" id="idgetRazaoSocial" value="<?php echo $nquant; ?>" size="60" maxlength="60" placeholder=""/>
+           </div> 
+        </div>             
+        <div class="row">
+           <div class="form-group col-md-2">   
+              <label for="nmgetRazaoSocial">Valor Unitário</label>
+              <input type="number" class="form-control" name="VALOR_UNIT" id="idgetRazaoSocial" value="<?php echo $nval_unit; ?>" size="60" maxlength="60" placeholder=""/>
+           </div> 
+           <div class="form-group col-md-2">   
+              <label for="nmgetRazaoSocial">Desconto</label>
+              <input type="number" class="form-control" name="VALOR_DESC" id="idgetRazaoSocial" value="<?php echo $ndesconto; ?>" size="60" maxlength="60" placeholder=""/>
+           </div> 
+           <div class="form-group col-md-2">   
+              <label for="nmgetRazaoSocial">Valor Total</label>
+              <input type="number" class="form-control" name="VALOR_TOT" id="idgetRazaoSocial" value="<?php echo $ntot; ?>" size="60" maxlength="60" placeholder=""/>
+           </div> 
+        </div>                     
+        <div class="row">                   
+        </div>
 
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#abaItens">Itens</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#abaDadosComplementares">Dados Complementares</a>
+                <a class="nav-link" data-toggle="tab" href="#abaDadosfiscais">Dados Fiscais</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#abaDemaisInformacoes">Demais Informacoes</a>
@@ -101,9 +181,9 @@ include $_SESSION['pastaapp']."/_conexao/crud.php";
                             <?php
                             $conn = conectar();
 
-                            $ctab = "MOV_PEDS A";
-                            $cccampo = "A.regid, A.seq_item, A.codigo, A.descr_item, A.quant, A.valor_unit, A.valor_unit * A.quant AS valor_tot ";
-                            $cwhere = "A.PED = '" . $cped . "'";                            
+                            $ctab    = "mov_peds A";
+                            $cccampo = "A.regid, A.seq_item, A.codigo, A.descr_item, A.quant, A.valor_unit, A.valor_unit * A.quant AS valor_tot ";                            
+                            $cwhere .= " AND A.PED = '" . $cped . "'";                            
                             $res = new crud();
                             $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -128,49 +208,63 @@ include $_SESSION['pastaapp']."/_conexao/crud.php";
                     <!-- <div class="ajax-action-button" id="add-more" onclick="createNew();" style="display: inline-block;">Adicionar Itens</div> -->
                 </div>
             </div>
-            <div id="abaDadosComplementares" class="tab-pane container fade">
+            <div id="abaDadosfiscais" class="tab-pane container-fluid fade">
                 <h5></h5>
                 <div class="row">
                     <div class="form-group col-md-3">   
-                        <label for="nmcbxBanco">Seu Pedido</label>
-                        <input type="text" class="form-control" name="nmgetCobranca" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
+                        <label for="nmcbxBanco">Aliq. ISS</label>
+                        <input type="text" class="form-control" name="ALIQ_ISS" id="idgetCobranca" value="<?php echo $naliq_iss; ?>" size="1" maxlength="1" placeholder=""/>
                     </div>
                     <div class="form-group col-md-3">   
-                        <label for="nmgetCobranca">Doc. Fiscal</label>
-                        <input type="text" class="form-control" name="nmgetCobranca" id="idgetCobranca" size="1" maxlength="1" placeholder=""/>
-                    </div> 
-                    <div class="form-group col-md-6">   
-                        <label for="nmgetJuros">Observação</label>
-                        <input type="text" class="form-control" name="nmgetJuros" id="idgetJuros" size="6" maxlength="6" placeholder=""/>
+                        <label for="nmgetCobranca">Aliq. IR</label>
+                        <input type="text" class="form-control" name="ALIQ_IR" id="idgetCobranca" value="<?php echo $naliq_ir; ?>" size="1" maxlength="1" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
-                        <label for="nmgetTolerancia">Desconto R$</label>
-                        <input type="number" class="form-control" name="nmgetTolerancia" id="idgetTolerancia" size="5" maxlength="5" placeholder=""/>
+                        <label for="nmgetJuros">Aliq. Pis</label>
+                        <input type="text" class="form-control" name="ALIQ_PIS" id="idgetJuros" value="<?php echo $naliq_pis; ?>" size="6" maxlength="6" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
-                        <label for="nmgetMulta">Acréscimo</label>
-                        <input type="number" class="form-control" name="nmgetMulta" id="idgetMulta" size="6" maxlength="6" placeholder=""/>
-                    </div>                     
-                </div>
+                        <label for="nmgetTolerancia">Aliq. Cofins</label>
+                        <input type="number" class="form-control" name="ALIQ_COFINS" id="idgetTolerancia" value="<?php echo $naliq_cof; ?>" size="5" maxlength="5" placeholder=""/>
+                    </div> 
+                 </div>    
+                 <div class="row">
+                    <div class="form-group col-md-3">   
+                        <label for="nmcbxBanco">Valor ISS</label>
+                        <input type="text" class="form-control" name="VALOR_ISS" id="idgetCobranca" value="<?php echo $nval_iss; ?>" size="1" maxlength="1" placeholder=""/>
+                    </div>
+                    <div class="form-group col-md-3">   
+                        <label for="nmgetCobranca">Valor IR</label>
+                        <input type="text" class="form-control" name="VALOR_IR" id="idgetCobranca" value="<?php echo $nval_ir; ?>" size="1" maxlength="1" placeholder=""/>
+                    </div> 
+                    <div class="form-group col-md-3">   
+                        <label for="nmgetJuros">Valor Pis</label>
+                        <input type="text" class="form-control" name="VALOR_PIS" id="idgetJuros" value="<?php echo $nval_pis; ?>" size="6" maxlength="6" placeholder=""/>
+                    </div> 
+                    <div class="form-group col-md-3">   
+                        <label for="nmgetTolerancia">Valor Cofins</label>
+                        <input type="number" class="form-control" name="VALOR_COFINS" id="idgetTolerancia" value="<?php echo $nval_cof; ?>" size="5" maxlength="5" placeholder=""/>
+                    </div> 
+                 </div> 
+                
+                <div class="row">
+                    <div class="form-group col-md-3">   
+                        <label for="nmcbxBanco">Codigo de Serviço</label>
+                        <input type="text" class="form-control" name="nmgetCobranca" id="idgetCobranca" value="<?php echo $ntot; ?>" size="1" maxlength="1" placeholder=""/>
+                    </div>
+                </div>    
             </div>
-            <div id="abaDemaisInformacoes" class="tab-pane container fade">
+           
+            <div id="abaDemaisInformacoes" class="tab-pane container-fluid fade">
                 <h5></h5>
                 <div class="row">
                     <div class="form-group col-md-12">   
                         <label for="nmtextObservacao">Observacao</label>
-                        <input type="text" class="form-control" name="nmtextObservacao" id="idtextObservacao" size="10" maxlength="10" placeholder=""/>
+                        <input type="text" class="form-control" name="OBS" id="idtextObservacao" value="<?php echo $cobs; ?>" size="10" maxlength="10" placeholder=""/>
                     </div> 
                 </div>
             </div> 
-            <div class="row">     
-                <div class="form-group col-md-3">   
-                    <input name="nmbtnnmbtnBuscaCEP" type="submit" id="idbtnidbtnBuscaCEP" value="Emitir Nota Fiscal" />
-                </div>
-
-                <div class="form-group col-md-3">   
-                    <input name="nmbtnnmbtnFinanceiro" type="submit" id="idbtnidbtnFinanceiro" value="Financeiro" />
-                </div>
-            </div>
+            
         </div> 
     </main>
 </html>

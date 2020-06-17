@@ -19,8 +19,12 @@ include $_SESSION['pastaapp']."/_conexao/crud.php";
 
             <div class="row">     
                 <div class="form-group col-md-12"> 
-                    <h2>Clientes </h2>
+                    <h2>Clientes </h2>                    
                 </div>  
+                <div style="display: none;"> <!-- Botão sem ação para evitar a tecla enter -->
+                   <input type="submit" name="prevent-enter-submit" onclick="return false;">
+                </div>
+
                 <div class="form-group col-md-5"> 
 
                     <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 

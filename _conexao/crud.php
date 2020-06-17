@@ -22,7 +22,7 @@ class crud {
         $this->csql = "UPDATE" . $this->tabela . " SET " . $setdados . " WHERE " . $where;
 
         $alterardados = $conn->prepare($this->csql);
-
+       // echo $this->csql;
         if ($alterardados->execute()) {
             
         }
@@ -33,7 +33,7 @@ class crud {
         $this->tabela = strtolower($this->tabela);
         
         $this->csql = "DELETE FROM " . $this->tabela . " WHERE " . $where;
-        
+         //echo $this->csql;
         $excluirdados = $conn->prepare($this->csql);
 
         if ($excluirdados->execute()) {
@@ -41,16 +41,16 @@ class crud {
         }
     }
 
-    public function obter($campos, $tabela, $where) {
+    public function obter($campos, $tabela, $where, $order = null) {
        
        include_once $_SESSION['pastaapp']."/conexao.php"; 
        $conn = conectar();
        
        $tabela = strtolower($tabela);
        
-       $this->csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;        
+       $this->csql = "SELECT " . $campos . " from " . $tabela . " where " . $where . " " . $order;        
        $selectdados = $conn->prepare($this->csql);
-      // echo $this->csql;
+       // echo $this->csql;
        try {
           if ($selectdados->execute()) {
              $adado = $selectdados->fetchall(PDO::FETCH_ASSOC);
