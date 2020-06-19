@@ -20,9 +20,9 @@ switch ($acao):
 
     case 'inserir':
 
-        $csql = "INSERT INTO " . $tabela . " (".$campos.") VALUES (".$valores.")";
-        echo ($csql);
+        $csql = "INSERT INTO " . $tabela . " (".$campos.") VALUES (".$valores.")";       
         $adicionadadaos = $conn->prepare($csql);          
+        logcrudjs( "Inserir - SCRIPT..." . $csql ,"logcrudjs",'Insert' );
         try{
            if ($adicionadadaos->execute()) {
                echo "Cadastro Realizado com Sucesso";
@@ -37,16 +37,15 @@ switch ($acao):
     case 'alterar':
         
         $csql = "UPDATE " . $tabela . " SET " . $setdados . " WHERE " . $where;        
-        
-        echo ($csql);
-        
         $alterardados = $conn->prepare($csql);
-        
+        logcrudjs( "Alterar - SCRIPT..." . $csql ,"logcrudjs",'UPDATE' );
         try{
            if ($alterardados->execute()) {
-               echo "Cadastro Atualizado";
+               //echo "Cadastro Atualizado";
+               return "Cadastro Atualizado";
            }else{
-               echo "Falha ao Atualizar";
+               return "Falha ao Atualizar";
+               
            }
         } catch(PDOException $e){           
            echo $e->getMessage();
@@ -55,10 +54,8 @@ switch ($acao):
 
     case 'excluir':
         $csql = "DELETE FROM " . $tabela . " WHERE " . $where;
-        
-      //  echo ($csql);
-        
         $excluirdados = $conn->prepare($csql);
+        logcrudjs( "Excluir - SCRIPT..." . $csql ,"logcrudjs",'DELETE' );
         if ($excluirdados->execute()) {
             echo(" Registro Apagado");            
         }else{
@@ -67,14 +64,64 @@ switch ($acao):
         break;        
 
     case 'obter':
-        $csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;
         
-        //echo $csql;
+        $csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;
         $selectdados = $conn->prepare($csql);
+        logcrudjs( "Obter - SCRIPT..." . $csql ,"logcrudjs",'Select' );
         if ($selectdados->execute()) {
             return $selectdados;
         }
         break;        
 
 endswitch;
+
+function logcrudjs($msg, $fileparam, $level = 'info', $carq = '')
+{
+    // variável que vai armazenar o nível do log (INFO, WARNING ou ERROR)
+    
+      // data atual
+    $date = date( 'Y-m-d H:i:s' );
+    
+   $datearq = date( 'dH' );
+   $pasta = $_SESSION['pastaapp']."/log";
+    $levelStr = '';
+    if (empty($fileparam)){
+       $file = 'logws.log';
+    }else{
+       $file = $fileparam.$datearq.".log"  ;
+    }
+        
+ 
+    // verifica o nível do log
+    switch ( $level )
+    {
+        case 'info':
+            // nível de informação
+            $levelStr = 'INFO';
+            break;
+ 
+        case 'warning':
+            // nível de aviso
+            $levelStr = 'WARNING';
+            break;
+ 
+        case 'error':
+            // nível de erro
+            $levelStr = 'ERROR';
+            break;
+    }
+ 
+  
+ 
+    // formata a mensagem do log
+    // 1o: data atual
+    // 2o: nível da mensagem (INFO, WARNING ou ERROR)
+    // 3o: a mensagem propriamente dita
+    // 4o: uma quebra de linha
+    $msgnew = sprintf( "[%s] [%s]: %s%s%s", $date, $levelStr, $msg, $carq, PHP_EOL );
+        
+    // escreve o log no arquivo
+    // é necessário usar FILE_APPEND para que a mensagem seja escrita no final do arquivo, preservando o conteúdo antigo do arquivo
+    file_put_contents( $pasta."/".$file, $msgnew, FILE_APPEND );
+}
 

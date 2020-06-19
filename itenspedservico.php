@@ -35,11 +35,11 @@ if(empty($cped) || empty($nregid)){
     
    $conn = conectar();
    
-   $ctab = "mov_peds A";
-   $cccampo =  "codigo,descr_item,quant,valor_unit,VALOR_COF,VALOR_PIS,COD_SERV_CID, ";
-   $cccampo .= "AL_COFINS,AL_PIS,AL_ISS,AL_IR,VALOR_IR,VALOR_ISS,SEQ_ITEM,OBS,valor_desc ";
-   $cwhere = " A.PED = '" . $cped . "'";
-   $cwhere .= " and A.regid = " . $nregid ;   
+   $ctab = "mov_peds a";
+   $cccampo =  "a.codigo, a.descr_item, a.quant, a.valor_unit, a.VALOR_COF, a.VALOR_PIS, a.COD_SERV_CID, ";
+   $cccampo .= "a.AL_COFINS, a.AL_PIS,AL_ISS, a.AL_IR, a.VALOR_IR, a.VALOR_ISS, a.SEQ_ITEM, a.OBS, a.valor_desc ";
+   $cwhere = " a.PED = '" . $cped . "'";
+   $cwhere .= " and a.regid = " . $nregid ;   
    $res = new crud();
    $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -186,9 +186,9 @@ echo $cdescritem;
                             <?php
                             $conn = conectar();
 
-                            $ctab    = "mov_peds A";
-                            $cccampo = "A.regid, A.seq_item, A.codigo, A.descr_item, A.quant, A.valor_unit, A.valor_unit * A.quant AS valor_tot ";                            
-                            $cwhere = " A.PED = '" . $cped . "'";                            
+                            $ctab    = "mov_peds a";
+                            $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot ";                            
+                            $cwhere = " a.PED = '" . $cped . "'";                            
                             $res = new crud();
                             $aret = $res->obter($cccampo, $ctab, $cwhere);
 

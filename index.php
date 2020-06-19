@@ -3,6 +3,8 @@
 session_start();
 
 $_SESSION['pastaapp'] = "";
+$_SESSION['usuario'] = "EDSANTOS";
+$_SESSION['cod_emp'] =  "100" ;
 $route = filter_input(INPUT_SERVER, 'REQUEST_URI') ;
 
 $pos = strpos($route, '/', 1);

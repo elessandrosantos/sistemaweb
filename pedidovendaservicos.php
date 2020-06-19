@@ -1,6 +1,8 @@
 <?php
 
 $cped = $_SESSION['npedido'];
+$cuser = $_SESSION['usuario'];
+$codemp = $_SESSION['cod_emp'];
 
 include $_SESSION['pastaapp']."/_conexao/crud.php";
 
@@ -8,12 +10,20 @@ if(empty($cped)){
     
    $acao = 'inserir';
    $cwhereform = '';
-    
+   
+   include $_SESSION['pastaapp']."/_conexao/numerador.php";
+   
+   $nReg = new numerador();
+   
+   $nped = $nReg->obter('pedido');
+   
+   $nped = str_pad($nped, 10 - strlen($nped), '0', STR_PAD_LEFT);
+   
    $ctpped = "PS";
-   $cped   = $ctpped . '00000001';
-   $cdata  = '';
-   $cusuario = '';            
-   $cempresa = '';
+   $cped   = $ctpped . $nped;
+   $cdata  = date("Y-m-d");
+   $cusuario = $cuser;            
+   $cempresa = $codemp;
    $ccliente = '';
    $ccondpagto = '';
    $ctpoperacao = '';
@@ -32,11 +42,11 @@ if(empty($cped)){
     
    $conn = conectar();
 
-   $ctab = "pedidos A, clientes B, condicoes C, operacoes D";
-   $cccampo = "A.aberta, A.usuario, A.cod_emp, A.cod_cli, B.nome, A.cod_con, A.cod_ser, A.seu_ped, A.doc_fiscal, A.obs1, A.obs2 ";
-   $cccampo .= ", A.desconto, A.acrescimo, C.descr as descrcond, D.descr as descroper";
-   $cwhere = "A.cod_cli = B.xclientes AND A.cod_con = c.codigo AND A.cod_ser = d.codigo";
-   $cwhere .= " and A.PED = '" . $cped . "'";
+   $ctab = "pedidos a, clientes b, condicoes c, operacoes d";
+   $cccampo = "a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 ";
+   $cccampo .= ", a.desconto, a.acrescimo, c.descr as descrcond, d.descr as descroper";
+   $cwhere = "a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo";
+   $cwhere .= " and a.PED = '" . $cped . "'";
    $res = new crud();
    $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -97,19 +107,19 @@ echo $cwhereform;
             <div class="row">
                <div class="form-group col-md-3">   
                   <label for="nmgetCodigoAnterior">Número</label>
-                  <input type="text" class="form-control" value="<?php echo $cped; ?>" name="PED" id="idgetPED" size="20" maxlength="20" placeholder=""/>
+                  <input type="text" class="form-control" readonly value="<?php echo $cped; ?>" name="PED" id="idgetPED" size="20" maxlength="20" placeholder=""/>
                </div> 
                <div class="form-group col-md-3">   
                   <label for="nmgetCNPJCPF">Data</label>
-                  <input type="date" class="form-control" value="<?php echo $cdata; ?>" name="ABERTA" id="idgetABERTA" size="20" maxlength="20" placeholder=""/>
+                  <input type="date" class="form-control" readonly value="<?php echo $cdata; ?>" name="ABERTA" id="idgetABERTA" size="20" maxlength="20" placeholder=""/>
                </div> 
                <div class="form-group col-md-3">   
                   <label for="nmgetRazaoSocial">Usuários</label>
-                  <input type="text" class="form-control" value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetUSUARIO" size="60" maxlength="60" placeholder=""/>
+                  <input type="text" class="form-control" readonly value="<?php echo $cusuario; ?>" name="USUARIO" id="idgetUSUARIO" size="60" maxlength="60" placeholder=""/>
                </div> 
                <div class="form-group col-md-3">   
                   <label for="nmgetRazaoSocial">Empresa</label>
-                  <input type="text" class="form-control" value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetEMPRESA" size="60" maxlength="60" placeholder=""/>
+                  <input type="text" class="form-control" readonly value="<?php echo $cempresa; ?>" name="COD_EMP" id="idgetEMPRESA" size="60" maxlength="60" placeholder=""/>
                </div> 
 
              </div>                     
@@ -212,9 +222,9 @@ echo $cwhereform;
                             <?php
                             $conn = conectar();
 
-                            $ctab = "MOV_PEDS A";
-                            $cccampo = "A.regid, A.seq_item, A.codigo, A.descr_item, A.quant, A.valor_unit, A.valor_unit * A.quant AS valor_tot ";
-                            $cwhere = "A.PED = '" . $cped . "'";                            
+                            $ctab = "MOV_PEDS a";
+                            $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot ";
+                            $cwhere = "a.PED = '" . $cped . "'";                            
                             $res = new crud();
                             $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -279,4 +289,5 @@ echo $cwhereform;
         </div> 
     </main>
 </html>
+
 

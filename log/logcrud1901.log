@@ -1,0 +1,117 @@
+[2020-06-19 01:10:31] []: Obter - SCRIPT...SELECT a.codigo, a.descr, a.valor_unit, a.ativo  from geral a where  a.msp='S' 
+[2020-06-19 01:10:49] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:43:57] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:44:20] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:44:23] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:44:23] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:44:23] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:44:23] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS0000000000' 
+[2020-06-19 01:45:47] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:45:49] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:45:49] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:45:49] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:45:49] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS0000000000' 
+[2020-06-19 01:47:00] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:47:02] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:47:02] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:47:02] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:47:02] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:48:06] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:48:06] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:48:06] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:48:06] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:48:10] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:48:10] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = '' 
+[2020-06-19 01:48:15] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:48:15] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:48:15] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:48:15] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:48:16] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:48:16] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = '' 
+[2020-06-19 01:48:27] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:48:27] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:48:27] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:48:27] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:48:30] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:50:24] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, a.descr as descrcond, a.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS00000000' 
+[2020-06-19 01:50:24] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:50:24] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:50:24] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:50:24] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS00000000' 
+[2020-06-19 01:50:30] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:50:30] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = 'PS00000000' 
+[2020-06-19 01:50:33] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, a.descr as descrcond, a.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS00000000' 
+[2020-06-19 01:50:33] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:50:33] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:50:33] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:50:33] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS00000000' 
+[2020-06-19 01:50:43] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:50:44] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:50:44] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:50:44] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:50:44] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:51:01] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:51:01] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:51:01] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:51:01] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:51:06] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:51:12] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, a.descr as descrcond, a.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS000000001' 
+[2020-06-19 01:51:12] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:51:12] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:51:12] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:51:12] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:51:47] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:51:53] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, a.descr as descrcond, a.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS000000001' 
+[2020-06-19 01:51:53] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:51:54] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:51:54] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:51:54] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:54:24] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:54:25] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, c.descr as descrcond, d.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS00000000' 
+[2020-06-19 01:54:25] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:54:25] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:54:25] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:54:25] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS00000000' 
+[2020-06-19 01:54:54] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:54:55] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, c.descr as descrcond, d.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS00000000' 
+[2020-06-19 01:54:56] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:54:56] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:54:56] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:54:56] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS00000000' 
+[2020-06-19 01:55:16] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:55:18] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, c.descr as descrcond, d.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS000000001' 
+[2020-06-19 01:55:18] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:55:18] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:55:18] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:55:18] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:55:21] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:55:21] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = 'PS000000001' 
+[2020-06-19 01:55:40] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:55:40] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = 'PS000000001' 
+[2020-06-19 01:55:57] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:55:57] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = 'PS000000001' 
+[2020-06-19 01:56:15] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:56:15] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = 'PS000000001' 
+[2020-06-19 01:56:32] []: Obter - SCRIPT...SELECT codigo, descr from geral where  msp ='S' and ativo = 1  order by descr 
+[2020-06-19 01:56:32] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where  a.PED = 'PS000000001' 
+[2020-06-19 01:56:38] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:56:40] []: Obter - SCRIPT...SELECT a.aberta, a.usuario, a.cod_emp, a.cod_cli, b.nome, a.cod_con, a.cod_ser, a.seu_ped, a.doc_fiscal, a.obs1, a.obs2 , a.desconto, a.acrescimo, c.descr as descrcond, d.descr as descroper from pedidos a, clientes b, condicoes c, operacoes d where a.cod_cli = b.xclientes AND a.cod_con = c.codigo AND a.cod_ser = d.codigo and a.PED = 'PS000000001' 
+[2020-06-19 01:56:40] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:56:41] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:56:41] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:56:41] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:57:30] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:57:32] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:57:32] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:57:32] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:57:32] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:57:41] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:57:43] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:57:43] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:57:43] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:57:43] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 
+[2020-06-19 01:59:15] []: Obter - SCRIPT...SELECT a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED  from pedidos a, clientes b where a.COD_CLI = b.XCLIENTES 
+[2020-06-19 01:59:16] []: Obter - SCRIPT...SELECT xclientes, nome  from clientes where 1=1 
+[2020-06-19 01:59:16] []: Obter - SCRIPT...SELECT codigo, descr  from condicoes where 1=1 
+[2020-06-19 01:59:16] []: Obter - SCRIPT...SELECT codigo, descr  from operacoes where 1=1 
+[2020-06-19 01:59:16] []: Obter - SCRIPT...SELECT a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot  from mov_peds a where a.PED = 'PS000000001' 

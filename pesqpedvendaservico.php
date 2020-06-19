@@ -17,19 +17,19 @@ If ($_POST) {
 
 
    If (!empty($cped)){
-      $cwherefiltro = " AND A.PED LIKE '%". $cped . "%'";
+      $cwherefiltro = " AND a.PED LIKE '%". $cped . "%'";
    }
 
    If (!empty($cnome)){
-      $cwherefiltro = " AND B.NOME LIKE '%". $cnome . "%'";
+      $cwherefiltro = " AND a.NOME LIKE '%". $cnome . "%'";
    }
 
    If (!empty($cdata)){
-      $cwherefiltro = " AND A.ABERTA = '". $cdata . "'";
+      $cwherefiltro = " AND a.ABERTA = '". $cdata . "'";
    }
 
    If (!empty($cstatus)){
-      $cwherefiltro = " AND A.STATYS_PED = '". $cstatus . "'";
+      $cwherefiltro = " AND a.STATUS_PED = '". $cstatus . "'";
    }
 
 }
@@ -83,9 +83,9 @@ If ($_POST) {
                     <?php
                     $conn = conectar();
 
-                    $ctab = "PEDIDOS A, CLIENTES B";
-                    $cccampo = "A.PED, A.COD_EMP, A.COD_CLI, B.NOME, A.ABERTA, A.VALOR_TOT, A.STATUS_PED ";
-                    $cwhere = 'A.COD_CLI = B.XCLIENTES';
+                    $ctab = "PEDIDOS a, CLIENTES b";
+                    $cccampo = "a.PED, a.COD_EMP, a.COD_CLI, b.NOME, a.ABERTA, a.VALOR_TOT, a.STATUS_PED ";
+                    $cwhere = 'a.COD_CLI = b.XCLIENTES';
                     $cwhere = $cwhere .  $cwherefiltro;
                     $res = new crud();
                     $aret = $res->obter($cccampo, $ctab, $cwhere);

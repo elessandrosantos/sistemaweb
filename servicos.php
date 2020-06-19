@@ -16,11 +16,15 @@ if(empty($citem)){
    $ccodfamilia   = "";
    $cdescrfamilia = "Informe a Grupo do Serviço";
    $ccodfisserv   = "";
-   $cdescrfisserv = "Informe o Codigo Serviço Fiscal";
-   $cativo        = "";
+   $cdescrfisserv = "Informe o Codigo Serviço Fiscal";   
    $nval_unit    =  1;
    $dinclusao     = date("Y/m/d");;
    $dalteracao    = date("Y/m/d");;
+   $cativo ='on';
+   $chk_ativo ='checked';
+
+   
+   
    
 }else{
   
@@ -29,9 +33,9 @@ if(empty($citem)){
     
    $conn = conectar();
 
-   $ctab = "geral A";
-   $cccampo = "A.codigo, A.descr, A.msp, A.codigo_a, A.familia, A.cod_fis_serv, A.ativo, A.inclusao, A.alteracao, A.valor_unit ";
-   $cwhere .= " A.codigo = '" . $citem . "'";
+   $ctab = "geral a";
+   $cccampo = "a.codigo, a.descr, a.msp, a.codigo_a, a.familia, a.cod_fis_serv, a.ativo, a.inclusao, a.alteracao, a.valor_unit ";
+   $cwhere .= " a.codigo = '" . $citem . "'";
    $res = new crud();
    $aret = $res->obter($cccampo, $ctab, $cwhere);
 
@@ -50,6 +54,18 @@ if(empty($citem)){
       $nval_unit     = $row['valor_unit'];
       $dinclusao     = $row['inclusao'];
       $dalteracao    = date("Y/m/d");
+      
+      
+      if ($cativo =='1'){
+         $cativo ='on';
+         $chk_ativo ='checked';
+      }
+      else{  
+         $cativo ='off';
+         $chk_ativo ='';      
+      }
+      
+      
                            
    } 
 }
@@ -87,7 +103,7 @@ if(empty($citem)){
                 <input type="text" class="form-control" name="DESCR" id="idgetDescricao" value="<?php echo $cdescr; ?>" size="60" maxlength="60" placeholder="Descrição do Serviço"/>
             </div>
             <div class="form-group col-md-1">
-                <input type="checkbox" name="ATIVO" id="idchkInativo" checked value="<?php echo $cativo; ?>"/>
+                <input type="checkbox" name="ATIVO" id="idchkInativo" <?php echo $chk_ativo; ?> value="<?php echo $cativo; ?>"/>
                 <label for="nmlblInativo">Ativo</label>
             </div>            
                       
