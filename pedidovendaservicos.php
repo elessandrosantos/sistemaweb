@@ -17,10 +17,12 @@ if(empty($cped)){
    
    $nped = $nReg->obter('pedido');
    
-   $nped = str_pad($nped, 10 - strlen($nped), '0', STR_PAD_LEFT);
+   $nped = str_pad($nped, 10 , '0', STR_PAD_LEFT);
+   echo $nped;
    
    $ctpped = "PS";
    $cped   = $ctpped . $nped;
+   $_SESSION['npedido'] = $cped;
    $cdata  = date("Y-m-d");
    $cusuario = $cuser;            
    $cempresa = $codemp;
@@ -74,6 +76,7 @@ if(empty($cped)){
 
 echo $acao;
 echo $cwhereform;
+
 
 
 ?>
@@ -200,8 +203,8 @@ echo $cwhereform;
         <div class="tab-content">
            
             <div id="abaItens" class="tab-pane container-fluid active">  
-                <div class="row">
-                    <a class="btn btn-success" href="index.php?p=dlgitenspedserv">Incluir Itens</a>
+                <div class="row">                                                                                        <!-- href="index.php?p=dlgitenspedserv"-->
+                    <a class="btn btn-success" onclick="return verificapedido('<?php echo $cped;?>'); return false;">Incluir Itens</a>
                 </div>    
                 <div class="margin-top-sm table-responsive"> 
                     <table class="table table-striped table-bordered">                        

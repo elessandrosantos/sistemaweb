@@ -161,8 +161,6 @@ function excluirfavoritos(id){
     pos = cpagina.indexOf("/", 1);
     cpagina = cpagina.substr(0, pos);
     
-    
-    
     $.ajax({
        url: cpagina+"/_conexao/crud_ajax.php",
        type: "POST",

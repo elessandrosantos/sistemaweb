@@ -15,7 +15,6 @@ $conn = conectar();
 
 $tabela = strtolower($tabela);
 
-
 switch ($acao):
 
     case 'inserir':
@@ -41,10 +40,11 @@ switch ($acao):
         logcrudjs( "Alterar - SCRIPT..." . $csql ,"logcrudjs",'UPDATE' );
         try{
            if ($alterardados->execute()) {
-               //echo "Cadastro Atualizado";
-               return "Cadastro Atualizado";
+               echo "Cadastro Atualizado";
+               //return "Cadastro Atualizado";
            }else{
-               return "Falha ao Atualizar";
+               echo "Falha ao Atualizar";
+               //return "Falha ao Atualizar";
                
            }
         } catch(PDOException $e){           
@@ -67,9 +67,12 @@ switch ($acao):
         
         $csql = "SELECT " . $campos . " from " . $tabela . " where " . $where;
         $selectdados = $conn->prepare($csql);
+        //echo($csql);
         logcrudjs( "Obter - SCRIPT..." . $csql ,"logcrudjs",'Select' );
         if ($selectdados->execute()) {
-            return $selectdados;
+            $retorno = $selectdados->fetchall(PDO::FETCH_ASSOC);
+            echo json_encode($retorno);
+            //echo var_dump($retorno);
         }
         break;        
 

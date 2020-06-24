@@ -32,8 +32,13 @@ function opcaomenu($cmenu, $cparam) {
     }
     
     if ($cmenu == "dlgpedvendaservicos") {
-        
-        $_SESSION['npedido'] =  $cparam;        
+        if (!empty($cparam)){
+           $_SESSION['npedido'] =  $cparam;      
+        }else{
+           $cparam = $_SESSION['npedido'];      
+        }
+        $_SESSION['npedido'] =  $cparam;  
+
         $ctela = 'pedidovendaservicos.php';
     }
 

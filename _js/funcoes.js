@@ -116,8 +116,7 @@ function getdadosform(tabela, acao, idwhere) {
                     }
 
                 }
-
-
+                
                 if (item.type == "email") {
                     pos = item.name.indexOf("#", 0);
                     if (pos < 0) {
@@ -245,14 +244,48 @@ function getdadosform(tabela, acao, idwhere) {
                 data: 'acao=alterar' + '&tab=' + tabela + '&setdados=' + setdados + '&where=' + where,
                 success: function (data) {
                     alert(data);
-                    alert('Cadastro Atualizado');
+                    //alert('Cadastro Atualizado');
                 }
             });
             break;
         default:
-            alert("Nenhuma função definipara para a acão" + acao + "!");
+            alert("Nenhuma função definida para para a acão" + acao + "!");
 
     }
 
 }
+
+function verificapedido(cpedido) {
+
+   var tabela = 'pedidos';
+   var campos =  'ped';
+   var where =  "ped='"+cpedido+"'";
+   var cpagina = window.location.pathname;
+   
+   var data
+   pos = cpagina.indexOf("/", 1);
+   cpagina = cpagina.substr(0, pos);
+   
+   
+   $.ajax({
+        url: cpagina + "/_conexao/crud_ajax.php",
+        type: "POST",
+        data: 'acao=obter' + '&tab=' + tabela + '&campos=' + campos + '&where=' + where,                
+        success: function (data) {
+            alert(data.length);
+            
+            if ( data.length <= 2 ){               
+               alert("Necessário Salvar o pedido antes de incluir o item!");
+               //return false;
+            }else{
+               location.href='index.php?p=dlgitenspedserv';
+            }     
+            
+            // retfunc = data;
+            // alert('Cadastro Atualizado 522');
+        }
+    });
+
+ }            
+
 
