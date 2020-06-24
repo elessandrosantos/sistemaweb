@@ -261,8 +261,7 @@ function verificapedido(cpedido) {
    var campos =  'ped';
    var where =  "ped='"+cpedido+"'";
    var cpagina = window.location.pathname;
-   
-   var data
+  
    pos = cpagina.indexOf("/", 1);
    cpagina = cpagina.substr(0, pos);
    
