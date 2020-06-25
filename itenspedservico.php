@@ -20,7 +20,7 @@ if(empty($cped) || empty($nregid)){
    $nval_pis    = "";
    $nval_ir     = "";
    $nval_iss    = "";
-   $nval_desc   = "";
+   $nval_desc   = 0;
    $naliq_cof   = "";
    $naliq_pis   = "";
    $naliq_iss   = "";
@@ -60,6 +60,8 @@ if(empty($cped) || empty($nregid)){
       $naliq_ir   = $row['AL_IR'];
       $ncodserv   = $row['COD_SERV_CID'];
       $cobs       = $row['OBS'];
+      
+      $ntot = (($nval_unit - $nval_desc) * $nquant);
                                  
    } 
 }
@@ -81,7 +83,83 @@ echo $cdescritem;
         <!-- BootstrapCDN e Ajax
         <script src="_js/jquery-351.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css"> -->
+        
+        
+        <script type="text/javascript"> 
+            function associaInput() {
+               
+               //pega o value do select
+               var e = document.getElementById("idcbxcodigoitem");
+               var itemSelecionado = e.options[e.selectedIndex].value;                              
+               var tabela = 'geral';
+               var campos =  'descr, valor_unit';
+               var where =  "codigo='"+itemSelecionado+"'";
+               var cpagina = window.location.pathname;
+               var cdescr = "";
+               var vunit  = 0;
+  
+               pos = cpagina.indexOf("/", 1);
+               cpagina = cpagina.substr(0, pos);
+   
+   
+               $.ajax({
+               url: cpagina + "/_conexao/crud_ajax.php",
+               type: "POST",
+               dataType: 'json',
+               data: 'acao=obter' + '&tab=' + tabela + '&campos=' + campos + '&where=' + where,                
+               success: function (data) {
+                   
+                   $.each(data, function(i, resp){
+                       cdescr = resp["descr"];                                          
+                       vunit  = resp["valor_unit"]; 
+                   });                   
+                  if ( cdescr === "" ){                                    
+                     cdescr = "Descrição Não Localizada";                     
+                     //return false;
+                  }
+                  document.getElementById("idgetdescritem").value = cdescr;
+                  document.getElementById("idgetvlrunit").value = vunit;
+                  
+               }
+               });
+               
+               //injeta no value do input
+               
+            };
+            
+             function calctotitem() {
+               //pega o value do select
+               var qt = document.getElementById("idgetquant").value;
+               var unit = document.getElementById("idgetvlrunit").value;
+               var desc = document.getElementById("idgetvlrdesc").value;
+               var vtot = document.getElementById("idgetvlrtot");
+               var tot = 0;
 
+               if(qt === ""){
+                  qt = 0;                  
+               }
+
+               if(unit === ""){
+                  unit = 0; 
+               }
+
+               if(desc === ""){
+                   desc = 0;
+               }               
+               
+               tot = ((unit - desc) * qt)               
+               //injeta no value do input
+               //document.getElementByid('idgetvlrtot').value = tot;
+               vtot.setAttribute("value", tot); 
+            };
+  
+        </script> 
+           
+            
+            
+            
+            
+            
 
     </head>
 <form id="fped" name="formnomeitempedserv" method="post" onsubmit="return getdadosform('mov_peds', '<?php echo $acao ;?>', '<?php echo $cwhereform;?>'); return false;">    
@@ -105,7 +183,7 @@ echo $cdescritem;
         <div class="row">
            <div class="form-group col-md-4">   
               <label for="nmgetCODIGO">Código</label>
-              <select name="CODIGO" class="form-control" id="idcbxcodigoitem" value="<?php echo $ccod; ?>">
+              <select name="CODIGO" class="form-control" id="idcbxcodigoitem" value="<?php echo $ccod; ?>" onchange="return associaInput();">    
                        <option value="<?php echo $ccod; ?>"><?php echo $ccod; ?></option>
                             <?php
                                 $conn = conectar();                               
@@ -127,26 +205,26 @@ echo $cdescritem;
            </div> 
            <div class="form-group col-md-6">   
               <label for="nmgetRazaoSocial">Descrição</label>
-              <input type="text" class="form-control" name="DESCR_ITEM" id="idgetRazaoSocial"  value="<?php echo $cdescritem; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="text" class="form-control" name="DESCR_ITEM" id="idgetdescritem"  value="<?php echo $cdescritem; ?>" size="60" maxlength="60" placeholder=""/>
            </div> 
 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Quantidade</label>
-              <input type="number" class="form-control" name="QUANT" id="idgetRazaoSocial" value="<?php echo $nquant; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="number" class="form-control" name="QUANT" id="idgetquant" onchange="return calctotitem();" value="<?php echo $nquant; ?>" size="60" maxlength="60" placeholder=""/>
            </div> 
         </div>             
         <div class="row">
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Valor Unitário</label>
-              <input type="number" class="form-control" name="VALOR_UNIT" step="0.01" id="idgetRazaoSocial" value="<?php echo $nval_unit; ?>" size="20" maxlength="20" placeholder=""/>
+              <input type="number" class="form-control" name="VALOR_UNIT" step="0.01" id="idgetvlrunit"  onchange="return calctotitem();" value="<?php echo $nval_unit; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
            <div class="form-group col-md-2">   
-              <label for="nmgetRazaoSocial">Desconto</label>
-              <input type="number" class="form-control" name="VALOR_DESC" step="0.01" id="idgetRazaoSocial" value="<?php echo $ndesconto; ?>" size="20" maxlength="20" placeholder=""/>
+              <label for="nmgetRazaoSocial">Desconto Unit.</label>
+              <input type="number" class="form-control" name="VALOR_DESC" step="0.01" id="idgetvlrdesc" onchange="return calctotitem();" value="<?php echo $nval_desc; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Valor Total</label>
-              <input type="number" class="form-control" name="#VALOR_TOT" readonly id="idgetRazaoSocial" value="<?php echo $ntot; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="number" class="form-control" name="#VALOR_TOT" readonly id="idgetvlrtot" value="<?php echo $ntot; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
         </div>                     
         <div class="row">                   
@@ -187,7 +265,7 @@ echo $cdescritem;
                             $conn = conectar();
 
                             $ctab    = "mov_peds a";
-                            $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot ";                            
+                            $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, (a.valor_unit - a.valor_desc) * a.quant AS valor_tot ";                            
                             $cwhere = " a.PED = '" . $cped . "'";                            
                             $res = new crud();
                             $aret = $res->obter($cccampo, $ctab, $cwhere);
@@ -272,4 +350,5 @@ echo $cdescritem;
         </div> 
     </main>
 </html>
+
 

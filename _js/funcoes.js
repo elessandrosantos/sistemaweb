@@ -49,7 +49,7 @@ $(function () {
     ;
 
     function Excluir() {
-        var par = $(this).parent().parent(); //tr
+        var par = $(this).parent().parent(); 
         par.remove();
     }
     ;
@@ -66,19 +66,35 @@ function getdadosform(tabela, acao, idwhere) {
     var dadosinput = document.getElementsByTagName("INPUT");
     var dadosselect = document.getElementsByTagName("SELECT");
     var where = "";
-    //var vUrl = location.origin;
-    //var cloc = location.search;
-    //var vwin = window.location.href
-    //var pag = location.host;
-    //var pagna = location.hostname;
+    var lret  = true;
+
+    switch (tabela) {
+       case 'clientes':
+           lret = validacliente();
+           break;
+       case 'geral':
+           validageral();
+           break;
+       case 'pedido':
+           validapedido();
+           break;
+       case 'mov_peds':
+           validamovpeds();
+           break;
+       default:
+          alert("Nenhuma função definida para para a tabela " + tabela + "!");
+    }
+    
+    if (!lret){
+      alert ("saiu pelo lret");  
+      return ;  
+    }
+    alert ("passou lret");
     var cpagina = window.location.pathname;
     var pos = 0;
 
     pos = cpagina.indexOf("/", 1);
     cpagina = cpagina.substr(0, pos);
-
-    //alert (acao);
-    //alert (idwhere);      
 
     switch (acao) {
         case 'inserir':
@@ -271,7 +287,7 @@ function verificapedido(cpedido) {
         type: "POST",
         data: 'acao=obter' + '&tab=' + tabela + '&campos=' + campos + '&where=' + where,                
         success: function (data) {
-            alert(data.length);
+            //alert(data.length);
             
             if ( data.length <= 2 ){               
                alert("Necessário Salvar o pedido antes de incluir o item!");
@@ -285,6 +301,28 @@ function verificapedido(cpedido) {
         }
     });
 
- }            
+ }  
+ 
+ 
+ function validacliente() {
+     alert("clientes_Alert");
+     return false;
+ }
+ 
+ function validageral() {
+     alert("geral_Alert");
+ }
+ 
+ function validapedido() {
+     alert("pedidos_Alert");
+ }
+ 
+ function validamovpeds() {
+     alert("movpeds_Alert");     
+ }
+ 
+ 
+ 
+ 
 
 

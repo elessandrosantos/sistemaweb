@@ -79,7 +79,7 @@ foreach ($aret as $row) {
         <!--<script src="_js/funcoes.js" type="text/javascript"></script>  -->
     </head>  
 </html>
-<form id="fatucli" name="formnomeatuclie" method="post" onsubmit="return getdadosform('CLIENTES', 'alterar', 'XCLIENTES=<?php echo $idcli; ?>'); return false;">  <!--<?php echo $idcli; ?>-->
+<form id="fatucli" name="formnomeatuclie" method="post" onsubmit="return getdadosform('clientes', 'alterar', 'xclientes=<?php echo $idcli; ?>'); return false;">  <!--<?php echo $idcli; ?>-->
     <body>
         <main class="container">
             <div class="row">     

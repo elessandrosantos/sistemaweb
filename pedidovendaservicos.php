@@ -226,7 +226,7 @@ echo $cwhereform;
                             $conn = conectar();
 
                             $ctab = "MOV_PEDS a";
-                            $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, a.valor_unit * a.quant AS valor_tot ";
+                            $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, (a.valor_unit - a.valor_desc) * a.quant AS valor_tot ";
                             $cwhere = "a.PED = '" . $cped . "'";                            
                             $res = new crud();
                             $aret = $res->obter($cccampo, $ctab, $cwhere);

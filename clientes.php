@@ -14,7 +14,7 @@ include $_SESSION['pastaapp']."/_conexao/crud.php";
 </html>     
 
 
-<form id="fcadcli" name="formnomecadclie" method="post" onsubmit="return getdadosform('CLIENTES', 'inserir'); return false;">  <!--action="fu_cadcliente.php" -->
+<form id="fcadcli" name="formnomecadclie" method="post" onsubmit="return getdadosform('clientes', 'inserir'); return false;">  <!--action="fu_cadcliente.php" -->
         <main class="container">
 
             <div class="row">     
