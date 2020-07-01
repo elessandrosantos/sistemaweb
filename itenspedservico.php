@@ -86,17 +86,19 @@ echo $cdescritem;
         
         
         <script type="text/javascript"> 
+                        
             function associaInput() {
                
                //pega o value do select
                var e = document.getElementById("idcbxcodigoitem");
                var itemSelecionado = e.options[e.selectedIndex].value;                              
                var tabela = 'geral';
-               var campos =  'descr, valor_unit';
+               var campos =  'descr, valor_unit, cod_fis_serv';
                var where =  "codigo='"+itemSelecionado+"'";
                var cpagina = window.location.pathname;
                var cdescr = "";
                var vunit  = 0;
+               var cservfiscal = "";
   
                pos = cpagina.indexOf("/", 1);
                cpagina = cpagina.substr(0, pos);
@@ -112,6 +114,7 @@ echo $cdescritem;
                    $.each(data, function(i, resp){
                        cdescr = resp["descr"];                                          
                        vunit  = resp["valor_unit"]; 
+                       cservfiscal  = resp["cod_fis_serv"];
                    });                   
                   if ( cdescr === "" ){                                    
                      cdescr = "Descrição Não Localizada";                     
@@ -119,6 +122,7 @@ echo $cdescritem;
                   }
                   document.getElementById("idgetdescritem").value = cdescr;
                   document.getElementById("idgetvlrunit").value = vunit;
+                  document.getElementById("idgetcod_serv").value = cservfiscal;
                   
                }
                });
@@ -152,14 +156,70 @@ echo $cdescritem;
                //document.getElementByid('idgetvlrtot').value = tot;
                vtot.setAttribute("value", tot); 
             };
+            
+            function calcimpitem() {
+               //pega o value do select
+               
+               var vtot = document.getElementById("idgetvlrtot").value;
+               
+               var al_iss = document.getElementById("idgetal_iss").value;
+               var al_ir = document.getElementById("idgetal_ir").value;
+               var al_pis = document.getElementById("idgetal_pis").value;
+               var al_cof = document.getElementById("idgetal_cof").value;
+               
+               var vl_iss = document.getElementById("idgetvl_iss");
+               var vl_ir = document.getElementById("idgetvl_ir");
+               var vl_pis = document.getElementById("idgetvl_pis");
+               var vl_cof = document.getElementById("idgetvl_cof");
+               
+               var vlr_iss;
+               var vlr_ir;
+               var vlr_pis;
+               var vlr_cof;
+               
+               if(al_iss === ""){
+                  al_iss = 0;                  
+               }
+
+               if(al_ir === ""){
+                  al_ir = 0; 
+               }
+
+               if(al_pis === ""){
+                   al_pis = 0;
+               }    
+               
+               if(al_cof === ""){
+                   al_cof = 0;
+               }    
+               
+               if((al_iss > 0) || (al_ir > 0) || (al_pis > 0) || (al_cof > 0)){
+                   
+                   vlr_iss = vtot*(al_iss/100);
+                   vlr_iss = vlr_iss.toFixed(2);
+                   vlr_ir  = vtot*(al_ir/100);
+                   vlr_ir = vlr_ir.toFixed(2);
+                   vlr_pis = vtot*(al_pis/100);
+                   vlr_pis = vlr_pis.toFixed(2);
+                   vlr_cof = vtot*(al_cof/100);                    
+                   vlr_cof = vlr_cof.toFixed(2);                   
+               }
+               
+               //injeta no value do input
+               //document.getElementByid('idgetvlrtot').value = tot;
+               vl_iss.setAttribute("value", vlr_iss); 
+               vl_ir.setAttribute("value",  vlr_ir); 
+               vl_pis.setAttribute("value", vlr_pis); 
+               vl_cof.setAttribute("value", vlr_cof);                
+            };
   
-        </script> 
-           
             
             
             
             
             
+  
+        </script>  
 
     </head>
 <form id="fped" name="formnomeitempedserv" method="post" onsubmit="return getdadosform('mov_peds', '<?php echo $acao ;?>', '<?php echo $cwhereform;?>'); return false;">    
@@ -183,7 +243,7 @@ echo $cdescritem;
         <div class="row">
            <div class="form-group col-md-4">   
               <label for="nmgetCODIGO">Código</label>
-              <select name="CODIGO" class="form-control" id="idcbxcodigoitem" value="<?php echo $ccod; ?>" onchange="return associaInput();">    
+              <select name="CODIGO" class="form-control" id="idcbxcodigoitem" required value="<?php echo $ccod; ?>" onchange="return associaInput();">   
                        <option value="<?php echo $ccod; ?>"><?php echo $ccod; ?></option>
                             <?php
                                 $conn = conectar();                               
@@ -210,17 +270,17 @@ echo $cdescritem;
 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Quantidade</label>
-              <input type="number" class="form-control" name="QUANT" id="idgetquant" onchange="return calctotitem();" value="<?php echo $nquant; ?>" size="60" maxlength="60" placeholder=""/>
+              <input type="number" class="form-control" name="QUANT" id="idgetquant" required min="0" onchange="return calctotitem();" value="<?php echo $nquant; ?>" size="60" maxlength="60" placeholder=""/>
            </div> 
         </div>             
         <div class="row">
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Valor Unitário</label>
-              <input type="number" class="form-control" name="VALOR_UNIT" step="0.01" id="idgetvlrunit"  onchange="return calctotitem();" value="<?php echo $nval_unit; ?>" size="20" maxlength="20" placeholder=""/>
+              <input type="number" class="form-control" name="VALOR_UNIT" step="0.01" required min="0" id="idgetvlrunit"  onchange="return calctotitem();" value="<?php echo $nval_unit; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Desconto Unit.</label>
-              <input type="number" class="form-control" name="VALOR_DESC" step="0.01" id="idgetvlrdesc" onchange="return calctotitem();" value="<?php echo $nval_desc; ?>" size="20" maxlength="20" placeholder=""/>
+              <input type="number" class="form-control" name="VALOR_DESC" step="0.01" id="idgetvlrdesc" min="0" onchange="return calctotitem();" value="<?php echo $nval_desc; ?>" size="20" maxlength="20" placeholder=""/>
            </div> 
            <div class="form-group col-md-2">   
               <label for="nmgetRazaoSocial">Valor Total</label>
@@ -231,9 +291,11 @@ echo $cdescritem;
         </div>
 
         <ul class="nav nav-tabs">
+            <!--
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#abaItens">Itens</a>
             </li>
+            -->
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#abaDadosfiscais">Dados Fiscais</a>
             </li>
@@ -242,7 +304,7 @@ echo $cdescritem;
             </li>
         </ul>
         <div class="tab-content">
-           
+           <!--
             <div id="abaItens" class="tab-pane container-fluid active">  
                 
                 <div class="margin-top-sm"> 
@@ -287,52 +349,53 @@ echo $cdescritem;
                             ?> 
                         </tbody>
                     </table>
-                    <!-- <div class="ajax-action-button" id="add-more" onclick="createNew();" style="display: inline-block;">Adicionar Itens</div> -->
+                     <div class="ajax-action-button" id="add-more" onclick="createNew();" style="display: inline-block;">Adicionar Itens</div>
                 </div>
             </div>
-            <div id="abaDadosfiscais" class="tab-pane container-fluid fade">
+            -->
+            <div id="abaDadosfiscais" class="tab-pane container-fluid active">
                 <h5></h5>
                 <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmcbxBanco">Aliq. ISS</label>
-                        <input type="text" class="form-control" name="AL_ISS" id="idgetCobranca" value="<?php echo $naliq_iss; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="AL_ISS" id="idgetal_iss" value="<?php echo $naliq_iss; ?>" size="1" maxlength="1" onchange="return calcimpitem();" placeholder=""/>
                     </div>
                     <div class="form-group col-md-3">   
                         <label for="nmgetCobranca">Aliq. IR</label>
-                        <input type="text" class="form-control" name="AL_IR" id="idgetCobranca" value="<?php echo $naliq_ir; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="AL_IR" id="idgetal_ir" value="<?php echo $naliq_ir; ?>" size="1" maxlength="1" onchange="return calcimpitem();" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetJuros">Aliq. Pis</label>
-                        <input type="text" class="form-control" name="AL_PIS" id="idgetJuros" value="<?php echo $naliq_pis; ?>" size="6" maxlength="6" placeholder=""/>
+                        <input type="text" class="form-control" name="AL_PIS" id="idgetal_pis" value="<?php echo $naliq_pis; ?>" size="6" maxlength="6" onchange="return calcimpitem();" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetTolerancia">Aliq. Cofins</label>
-                        <input type="number" class="form-control" name="AL_COFINS" id="idgetTolerancia" value="<?php echo $naliq_cof; ?>" size="5" maxlength="5" placeholder=""/>
+                        <input type="number" class="form-control" name="AL_COFINS" id="idgetal_cof" value="<?php echo $naliq_cof; ?>" size="5" maxlength="5" onchange="return calcimpitem();" placeholder=""/>
                     </div> 
                  </div>    
                  <div class="row">
                     <div class="form-group col-md-3">   
                         <label for="nmcbxBanco">Valor ISS</label>
-                        <input type="text" class="form-control" name="VALOR_ISS" id="idgetCobranca" value="<?php echo $nval_iss; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="VALOR_ISS" id="idgetvl_iss" value="<?php echo $nval_iss; ?>" size="1" maxlength="1" placeholder=""/>
                     </div>
                     <div class="form-group col-md-3">   
                         <label for="nmgetCobranca">Valor IR</label>
-                        <input type="text" class="form-control" name="VALOR_IR" id="idgetCobranca" value="<?php echo $nval_ir; ?>" size="1" maxlength="1" placeholder=""/>
+                        <input type="text" class="form-control" name="VALOR_IR" id="idgetvl_ir" value="<?php echo $nval_ir; ?>" size="1" maxlength="1" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetJuros">Valor Pis</label>
-                        <input type="text" class="form-control" name="VALOR_PIS" id="idgetJuros" value="<?php echo $nval_pis; ?>" size="6" maxlength="6" placeholder=""/>
+                        <input type="text" class="form-control" name="VALOR_PIS" id="idgetvl_pis" value="<?php echo $nval_pis; ?>" size="6" maxlength="6" placeholder=""/>
                     </div> 
                     <div class="form-group col-md-3">   
                         <label for="nmgetTolerancia">Valor Cofins</label>
-                        <input type="number" class="form-control" name="VALOR_COF" id="idgetTolerancia" value="<?php echo $nval_cof; ?>" size="5" maxlength="5" placeholder=""/>
+                        <input type="number" class="form-control" name="VALOR_COF" id="idgetvl_cof" value="<?php echo $nval_cof; ?>" size="5" maxlength="5" placeholder=""/>
                     </div> 
                  </div> 
                 
                 <div class="row">
                     <div class="form-group col-md-3">   
-                        <label for="nmcbxBanco">Codigo de Serviço</label>
-                        <input type="text" class="form-control" name="COD_SERV_CID" id="idgetCobranca" value="<?php echo $$ncodserv; ?>" size="1" maxlength="1" placeholder=""/>
+                        <label for="nmgetcodserv">Codigo de Serviço</label>
+                        <input type="text" class="form-control" name="COD_SERV_CID" id="idgetcod_serv" value="<?php echo $ncodserv; ?>" size="1" maxlength="1" placeholder=""/>
                     </div>
                 </div>    
             </div>

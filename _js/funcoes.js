@@ -1,3 +1,4 @@
+
 $(function () {
     function Adicionar() {
         $("#tblCadastro tbody").append(
