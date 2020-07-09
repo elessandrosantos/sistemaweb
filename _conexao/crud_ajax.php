@@ -34,7 +34,8 @@ switch ($acao):
         break;
 
     case 'alterar':
-        
+
+        $setdados = str_replace('<.>', '+', $setdados);
         $csql = "UPDATE " . $tabela . " SET " . $setdados . " WHERE " . $where;        
         $alterardados = $conn->prepare($csql);
         logcrudjs( "Alterar - SCRIPT..." . $csql ,"logcrudjs",'UPDATE' );

@@ -30,18 +30,27 @@ class crud {
         }
     }
 
-    public function excluir($where) {
-
-        $this->tabela = strtolower($this->tabela);
-        
-        $this->csql = "DELETE FROM " . $this->tabela . " WHERE " . $where;
+    public function excluir($tabela, $where) {
+        include_once $_SESSION['pastaapp']."/conexao.php"; 
+        $conn = conectar();
+        $tabela = strtolower($tabela);
+        $this->csql = "DELETE FROM " . $tabela . " WHERE " . $where;
+        //echo $this->csql;
         logcrud( "excluir - SCRIPT..." . $this->csql ,"logcrud",'Deletar' );
          //echo $this->csql;
         $excluirdados = $conn->prepare($this->csql);
 
         if ($excluirdados->execute()) {
-            
+        
+          return true; //  echo "excluido";
+          
+        }else{
+          
+          return false;  
+          
+          //  echo "falha ao excluir";
         }
+        
     }
 
     public function obter($campos, $tabela, $where, $order = null) {

@@ -206,8 +206,8 @@ $_SESSION['pastaapp'] = $_SERVER['DOCUMENT_ROOT'].$cpasta;
                     $vlrpag = @$_GET['p'];
                     $vlrparam = @$_GET['id'];
                     if (!empty($vlrpag)) {
-                        require 'opcaomenu.php';
-                        $telaopen = opcaomenu($vlrpag, $vlrparam);
+                        require_once 'opcaomenu.php';
+                        $telaopen = opcaomenu($vlrpag, $vlrparam);                        
                         require_once $telaopen;
                     }
 

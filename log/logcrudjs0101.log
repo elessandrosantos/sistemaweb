@@ -1,1 +1,0 @@
-[2020-07-01 01:05:05] []: Obter - SCRIPT...SELECT descr, valor_unit, cod_fis_serv from geral where codigo='0001 '

@@ -325,7 +325,6 @@ echo $cdescritem;
                             
                             <?php
                             $conn = conectar();
-
                             $ctab    = "mov_peds a";
                             $cccampo = "a.regid, a.seq_item, a.codigo, a.descr_item, a.quant, a.valor_unit, (a.valor_unit - a.valor_desc) * a.quant AS valor_tot ";                            
                             $cwhere = " a.PED = '" . $cped . "'";                            

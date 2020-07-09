@@ -4,7 +4,7 @@
 function opcaomenu($cmenu, $cparam) {
     
     if ($cmenu == "dlgpesqservicos") {
-        $ctela = 'pesqservicos.php';
+        $ctela = 'pesqservicos.php';                  
     }
     if ($cmenu == "dlgservicos") {
         $_SESSION['param'] = $cparam;
@@ -60,6 +60,6 @@ function opcaomenu($cmenu, $cparam) {
     if (empty($ctela)){
        $ctela = 'empty.php';
     }
-    
+   
     return $ctela;
 }

@@ -104,9 +104,14 @@ echo $cwhereform;
             </div>
 
             <div class="form-group col-md-5"> 
-                <input class="btn btn-success" name="nmbtnSalvar" type="submit" id="idbtnSalvar" value="Salvar" /> 
+                <input class="btn btn-success" name="nmbtnSalvar" type="submit"  id="idbtnSalvar"  value="Salvar" /> 
+                <a class="btn btn-success" >Liberar</a>                                               
             </div> 
-                     
+            <!--       
+            <div class="form-group col-md-5"> 
+                <input class="btn btn-success" name="nmbtnliberar" id="idbtnliberar" value="Liberar" /> 
+            </div> 
+        -->
             <div class="row">
                <div class="form-group col-md-3">   
                   <label for="nmgetCodigoAnterior">Número</label>

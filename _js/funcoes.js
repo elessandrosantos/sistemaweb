@@ -50,7 +50,7 @@ $(function () {
     ;
 
     function Excluir() {
-        var par = $(this).parent().parent(); 
+        var par = $(this).parent().parent();
         par.remove();
     }
     ;
@@ -67,30 +67,30 @@ function getdadosform(tabela, acao, idwhere) {
     var dadosinput = document.getElementsByTagName("INPUT");
     var dadosselect = document.getElementsByTagName("SELECT");
     var where = "";
-    var lret  = true;
+    var lret = true;
 
     switch (tabela) {
-       case 'clientes':
-           lret = validacliente();
-           break;
-       case 'geral':
-           validageral();
-           break;
-       case 'pedido':
-           validapedido();
-           break;
-       case 'mov_peds':
-           validamovpeds();
-           break;
-       default:
-          alert("Nenhuma função definida para para a tabela " + tabela + "!");
+        case 'clientes':
+            lret = validacliente();
+            break;
+        case 'geral':
+            validageral();
+            break;
+        case 'pedido':
+            validapedido();
+            break;
+        case 'mov_peds':
+            validamovpeds();
+            break;
+        default:
+            alert("Nenhuma função definida para a tabela " + tabela + "!");
     }
-    
-    if (!lret){
-      alert ("saiu pelo lret");  
-      return ;  
+
+    if (!lret) {
+        alert("saiu pelo lret");
+        return;
     }
-    alert ("passou lret");
+    alert("passou lret");
     var cpagina = window.location.pathname;
     var pos = 0;
 
@@ -133,7 +133,7 @@ function getdadosform(tabela, acao, idwhere) {
                     }
 
                 }
-                
+
                 if (item.type == "email") {
                     pos = item.name.indexOf("#", 0);
                     if (pos < 0) {
@@ -274,56 +274,113 @@ function getdadosform(tabela, acao, idwhere) {
 
 function verificapedido(cpedido) {
 
-   var tabela = 'pedidos';
-   var campos =  'ped';
-   var where =  "ped='"+cpedido+"'";
-   var cpagina = window.location.pathname;
-  
-   pos = cpagina.indexOf("/", 1);
-   cpagina = cpagina.substr(0, pos);
-   
-   
-   $.ajax({
+    var tabela = 'pedidos';
+    var campos = 'ped';
+    var where = "ped='" + cpedido + "'";
+    var cpagina = window.location.pathname;
+
+    pos = cpagina.indexOf("/", 1);
+    cpagina = cpagina.substr(0, pos);
+
+
+    $.ajax({
         url: cpagina + "/_conexao/crud_ajax.php",
         type: "POST",
-        data: 'acao=obter' + '&tab=' + tabela + '&campos=' + campos + '&where=' + where,                
+        data: 'acao=obter' + '&tab=' + tabela + '&campos=' + campos + '&where=' + where,
         success: function (data) {
             //alert(data.length);
-            
-            if ( data.length <= 2 ){               
-               alert("Necessário Salvar o pedido antes de incluir o item!");
-               //return false;
-            }else{
-               location.href='index.php?p=dlgitenspedserv';
-            }     
-            
+
+            if (data.length <= 2) {
+                alert("Necessário Salvar o pedido antes de incluir o item!");
+                //return false;
+            } else {
+                location.href = 'index.php?p=dlgitenspedserv';
+            }
+
             // retfunc = data;
             // alert('Cadastro Atualizado 522');
         }
     });
 
- }  
- 
- 
- function validacliente() {
-     alert("clientes_Alert");
-     return false;
- }
- 
- function validageral() {
-     alert("geral_Alert");
- }
- 
- function validapedido() {
-     alert("pedidos_Alert");
- }
- 
- function validamovpeds() {
-     alert("movpeds_Alert");     
- }
- 
- 
- 
- 
+}
+
+
+function validacliente() {
+    alert("clientes_Alert");
+    return false;
+}
+
+function validageral() {
+    alert("geral_Alert");
+}
+
+function validapedido() {
+    alert("pedidos_Alert");
+}
+
+function validamovpeds() {
+    alert("movpeds_Alert");
+}
+
+
+function criapreped(usuario, citem, cdescr, nvalor) {
+
+    var tabela = 'prepeds';
+    var campos = 'usuario, cod_item, descr, valor_unit, quant';
+    var dados = "'" + usuario + "','" + citem + "','" + cdescr + "'," + nvalor + ",1" ;
+    var where = "usuario='"+usuario+"' and cod_item='" + citem + "'";
+    var cpagina = window.location.pathname;
+    var setdados = "";
+
+    pos = cpagina.indexOf("/", 1);
+    cpagina = cpagina.substr(0, pos);
+    
+    
+    $.ajax({
+        url: cpagina + "/_conexao/crud_ajax.php",
+        type: "POST",
+        data: 'acao=obter' + '&tab=' + tabela + '&campos=' + campos + '&where=' + where,
+        success: function (data) {
+            
+            if (data.length <= 2) {
+               $.ajax({
+                  url: cpagina + "/_conexao/crud_ajax.php",
+                  type: "POST",
+                  data: 'acao=inserir' + '&tab=' + tabela + '&campos=' + campos + '&valores=' + dados,
+                  success: function (data) {
+                     alert(data);
+                     //alert('Cadastro Realizado');
+                  }
+               });
+           }else{               
+               setdados = "quant = quant <.> 1";  // usado isto pro se incluir o + o post na recepção tira o comando               
+               
+               $.ajax({
+                url: cpagina + "/_conexao/crud_ajax.php",
+                type: "POST",
+                data: 'acao=alterar' + '&tab=' + tabela + '&setdados=' + setdados + '&where=' + where,
+                success: function (data) {
+                    alert(data);
+                    //alert('Cadastro Atualizado');
+                }
+            });
+               
+               
+           }   
+                        
+            //alert('Cadastro Realizado');
+        }
+    });
+
+
+    
+
+
+}
+
+
+
+
+
 
 
